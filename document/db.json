@@ -1,0 +1,29 @@
+//Users collection
+{
+  'userid': '1',
+  "firstname": '',
+  "lastname": '',
+  "email": "",
+  "password": "",
+  ...
+}
+
+//Products collection
+{
+  "productid": "",
+  "productname": "",
+  "description": "",
+  "postdate": "",
+  "comments": [
+                {
+                  "userid": "userid",
+                  "text": "",
+                  "postdate": "",
+                  ...
+                }
+              ],
+  "adduser": "userid",
+  ...
+}
+
+
