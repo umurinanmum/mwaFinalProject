@@ -1,18 +1,18 @@
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
-let bearer = require('express-bearer-token');
-let cors = require('cors');
-let MongoClient = require('mongodb').MongoClient;
-let client = new MongoClient('mongodb+srv://mwa:mwa@cluster0-rtumx.mongodb.net/test?retryWrites=true');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-let indexRouter = require('./routes/index');
+const MongoClient = require('mongodb').MongoClient;
+const client = new MongoClient('mongodb+srv://test:test@mongodb-0besx.mongodb.net/mwa', { useNewUrlParser: true });
+//const client = new MongoClient('mongodb+srv://mwa:mwa@cluster0-rtumx.mongodb.net/test?retryWrites=true');
 
-let app = express();
-let port = 8888;
+var indexRouter = require('./routes/index');
+var productsRouter = require('./routes/products');
 
-app.set('port', process.env.PORT || port);
+var app = express();
+var port = 8888;
 let db = null;
 
 app.use((req, res, next) => {
@@ -20,6 +20,7 @@ app.use((req, res, next) => {
     client.connect(err => {
       if (err) throw (err);
       db = client.db("finalProject");
+      //db = client.db("mwa");
       req.db = db;
       next();
     })
@@ -34,15 +35,6 @@ app.use((req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.set('etag', true);
-app.disable("x-powered-by");
-app.set('env', 'development');
-app.set('trust proxy', true);
-app.set('case sensitive routing', true);
-app.set("strict routing", true);
-
-app.use(cors());
-app.use(bearer());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -50,6 +42,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/products', productsRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -62,5 +60,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-port = app.get('port');
-app.listen(port, ()=>{ console.log(`Listening on port: ${port}`);});
+app.listen(port, () => { console.log(`Listening on port: ${port}`); })
+
+module.exports = app;
