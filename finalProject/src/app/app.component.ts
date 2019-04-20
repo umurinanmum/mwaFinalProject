@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MwaHttpServiceService } from './mwa-http-service.service';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 // `
 //   <div>Login Form</div>
@@ -20,8 +20,8 @@ export class AppComponent {
 
   constructor(http : MwaHttpServiceService,private formBuilder : FormBuilder){
     this.loginForm = formBuilder.group({
-        'mail' : ['username'],
-        'password' : ['password']
+        'mail' : ['',Validators.compose([Validators.required,Validators.email])],
+        'password' : ['']
     });
   }
 

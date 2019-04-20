@@ -10,13 +10,20 @@
         <div id="formContent">
             <form [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
 
-                <input type="text" name="mail" [formControl]="loginForm.get('mail')" class="fadeIn first" />
+                <div *ngIf="!loginForm.get('mail').valid && loginForm.dirty ">Check Your Mail</div>
+                <input type="text" name="mail" [formControl]="loginForm.get('mail')" class="fadeIn first"
+                    placeholder="Mail" />
 
-                <input type="text" name="password" [formControl]="loginForm.get('password')" class="fadeIn second" />
+                <input type="text" name="password" [formControl]="loginForm.get('password')" class="fadeIn second"
+                    placeholder="Password" />
 
-                <input type="submit" [disabled]="!loginForm.valid" class="fadeIn third" value="Login"/>
+                <input type="submit" [disabled]="!loginForm.valid" class="fadeIn third" value="Login" />
 
             </form>
+
+            <div id="formFooter">
+                <input type="button" class="fadeIn forth" value="Still Not A Member ?" />
+            </div>
         </div>
     </div>
 
