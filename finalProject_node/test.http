@@ -3,7 +3,7 @@ GET http://localhost:8888/products/  HTTP/1.1
 
 ###
 
-GET http://localhost:8888/products/2  HTTP/1.1
+GET http://localhost:8888/products/1  HTTP/1.1
 
 ###
 
@@ -13,7 +13,7 @@ DELETE http://localhost:8888/products/2  HTTP/1.1
 POST http://localhost:8888/products/  HTTP/1.1
 Content-Type: application/json
 
-{"productid": "2", "productname": "Car", "description": "description asdsa", "postdate": "", "adduser": 1}
+{"productid": "1", "productname": "Car", "description": "description asdsa", "postdate": "", "adduser": 1}
 
 ###
 PUT http://localhost:8888/products/  HTTP/1.1

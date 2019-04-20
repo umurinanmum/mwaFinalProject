@@ -1,5 +1,6 @@
 let router = require('express').Router();
 let joi = require('joi');
+//let ObjectID = require('mongodb').ObjectID;
 
 /*
 //Users collection
@@ -40,18 +41,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:productid', (req, res) => {
-    if(!req.params.productid)
+    if (!req.params.productid)
         return res.status(400).json({success: "ProductID parameter is missing."});
 
     req.db.collection('products')
-        .findOne({ productid: parseInt(req.params.productid)}, (err, data) => {
+        .findOne({ productid: req.params.productid }, (err, data) => {
             if(err) return res.status(500).json(err);
             res.json(data);
         });
 });
 
 router.delete('/:productid', (req, res) => {
-    if(!req.params.productid)
+    if (!req.params.productid)
         return res.status(400).json({success: "ProductID parameter is missing."});
 
     req.db.collection('products')
@@ -81,7 +82,7 @@ router.put('/', (req, res) => {
     if(err) return res.status(400).json(error.details[0].message);
 
     req.db.collection('products')
-        .update({ productid: parseInt(req.body.productid)}, req.body, (err) => {
+        .update({ productid: req.body.productid}, req.body, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'updated'});
         });
