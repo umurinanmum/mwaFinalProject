@@ -9,18 +9,18 @@ import { MwaHttpServiceService } from './mwa-http-service.service';
 })
 export class RegisterComponent {
 
-  registerForm : FormGroup;
+  registerForm: FormGroup;
 
-  constructor(http : MwaHttpServiceService,private formBuilder : FormBuilder){
+  constructor(http: MwaHttpServiceService, private formBuilder: FormBuilder) {
     this.registerForm = formBuilder.group({
-        'mail' : ['',Validators.compose([Validators.required,Validators.email])],
-        'password' : [''],
-        'firstName' : [''],
-        'lastName' : [''],
+      'mail': ['', Validators.compose([Validators.required, Validators.email])],
+      'password': [''],
+      'firstName': [''],
+      'lastName': [''],
     });
   }
 
-  onSubmit() : void {
+  onSubmit(): void {
     console.log(this.registerForm.value);
   }
 

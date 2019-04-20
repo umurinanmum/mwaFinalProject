@@ -5,7 +5,7 @@
     <div id="formContent">
       <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
 
-        <div *ngIf="!loginForm.get('mail').valid && loginForm.dirty ">Check Your Mail</div>
+        <div *ngIf="!registerForm.get('mail').valid && registerForm.dirty ">Check Your Mail</div>
         <input type="text" name="mail" [formControl]="registerForm.get('mail')" class="fadeIn first"
           placeholder="Mail" />
 
@@ -18,13 +18,10 @@
         <input type="text" name="lastName" [formControl]="registerForm.get('lastName')" class="fadeIn second"
           placeholder="Last Name" />
 
-        <input type="submit" [disabled]="!registerForm.valid" class="fadeIn third" value="Login" />
+        <input type="submit" [disabled]="!registerForm.valid" class="fadeIn third" value="Register" />
 
       </form>
 
-      <div id="formFooter">
-        <input type="button" class="fadeIn forth" value="Still Not A Member ?" />
-      </div>
     </div>
   </div>
 
