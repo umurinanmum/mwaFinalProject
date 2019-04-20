@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var authenticate = require('./middlewares/AuthorizationMiddleware');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -13,6 +15,8 @@ const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//app.use(authenticate.authenticate);
 
 //routers
 app.use('/', indexRouter);
