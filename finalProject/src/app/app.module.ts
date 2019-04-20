@@ -10,15 +10,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { ProductComponent } from 'src/product/product.component';
+import { RegisterComponent } from './register.component'; 
 
 
 const MWA_ROUTES = [
-    {path:'products', component: ProductComponent}
+    {path:'products', component: ProductComponent},
+    {path:'register', component: RegisterComponent}
   ];
 
 @NgModule({
   declarations: [
-    AppComponent,ProductComponent
+    AppComponent,ProductComponent, RegisterComponent
   ],
   imports: [
     BrowserModule,
