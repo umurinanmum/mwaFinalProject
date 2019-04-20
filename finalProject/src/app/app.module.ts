@@ -17,7 +17,8 @@ import { LoginComponent } from './login.component';
 const MWA_ROUTES = [
   { path: 'products', component: ProductComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({

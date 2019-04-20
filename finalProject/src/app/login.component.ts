@@ -10,21 +10,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  loginForm : FormGroup;
+  loginForm: FormGroup;
 
-  constructor(http : MwaHttpServiceService,private formBuilder : FormBuilder,private router : Router){
+  constructor(http: MwaHttpServiceService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = formBuilder.group({
-        'mail' : ['',Validators.compose([Validators.required,Validators.email])],
-        'password' : ['']
+      'mail': ['', Validators.compose([Validators.required, Validators.email])],
+      'password': ['']
     });
   }
 
-  onSubmit() : void {
+  onSubmit(): void {
     console.log(this.loginForm.value);
   }
 
-  onRegister() : void {
-   // this.router.navigate(['register']);
+  onRegister(): void {
+    this.router.navigate(['register']);
   }
 
 }
