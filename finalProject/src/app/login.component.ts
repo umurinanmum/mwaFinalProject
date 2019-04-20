@@ -21,6 +21,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     console.log(this.loginForm.value);
+    //this.router.navigate(['products']);
   }
 
   onRegister(): void {
