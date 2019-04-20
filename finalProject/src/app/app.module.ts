@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './token-interceptor';
 
 import {Routes, RouterModule} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import { ProductComponent } from 'src/product/product.component';
 
 
@@ -20,7 +23,8 @@ const MWA_ROUTES = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(MWA_ROUTES)
+    RouterModule.forRoot(MWA_ROUTES),
+    ReactiveFormsModule
   ],
   providers: [
     {

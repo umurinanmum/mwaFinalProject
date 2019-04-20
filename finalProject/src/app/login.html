@@ -1,0 +1,25 @@
+<html>
+
+<body>
+    <div class="wrapper fadeInDown">
+
+        <div class="fadeIn first">
+            <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+        </div>
+
+        <div id="formContent">
+            <form [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
+
+                <input type="text" name="mail" [formControl]="loginForm.get('mail')" class="fadeIn first" />
+
+                <input type="text" name="password" [formControl]="loginForm.get('password')" class="fadeIn second" />
+
+                <input type="submit" [disabled]="!loginForm.valid" class="fadeIn third" value="Login"/>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
