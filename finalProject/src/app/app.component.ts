@@ -3,7 +3,12 @@ import { MwaHttpServiceService } from './mwa-http-service.service';
 
 @Component({
   selector: 'app-root',
-  template: `<div>umur</div>`,
+  template: `
+  <div>Login Form</div>
+  <a [routerLink] = "['products']"> PRODUCTS </a>
+  
+  <router-outlet></router-outlet>
+  `,
   styles: []
 })
 export class AppComponent {

@@ -5,13 +5,22 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppComponent } from './app.component'; 
 import { TokenInterceptor } from './token-interceptor';
 
+import {Routes, RouterModule} from '@angular/router';
+import { ProductComponent } from 'src/product/product.component';
+
+
+const MWA_ROUTES = [
+    {path:'products', component: ProductComponent}
+  ];
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,ProductComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(MWA_ROUTES)
   ],
   providers: [
     {
