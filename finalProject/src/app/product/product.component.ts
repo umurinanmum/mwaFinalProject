@@ -24,7 +24,7 @@ export class ProductComponent {
 
     onCreateProduct() {
       console.log('onCreateProduct');
-      let body = "test";
+      let body: any;
       // body = {
       //   'productid': this.createProduct.get('productid').value,
       //   'productname': this.createProduct.get('productname').value,

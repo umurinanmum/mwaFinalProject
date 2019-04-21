@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+//import { HttpModule} from "@angular/http";
+//import {HTTP_INTERCEPTORS} from "@angular/common/http";
+
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './token-interceptor';
 
@@ -12,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from 'src/app/product/product.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
+import {ProductListComponent} from "./product/product-list/product-list.component";
 
 
 const MWA_ROUTES = [
@@ -23,10 +27,11 @@ const MWA_ROUTES = [
 
 @NgModule({
   declarations: [
-    AppComponent, ProductComponent, RegisterComponent, LoginComponent
+    AppComponent, ProductComponent, RegisterComponent, LoginComponent, ProductListComponent
   ],
   imports: [
     BrowserModule,
+    //HttpModule,
     HttpClientModule,
     RouterModule.forRoot(MWA_ROUTES),
     ReactiveFormsModule
