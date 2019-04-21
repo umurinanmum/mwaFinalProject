@@ -1,0 +1,33 @@
+<h2>Create a Product</h2>
+
+<form [formGroup]="createProduct" (ngSubmit)="onCreateProduct()" >
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="productid" placeholder="Product Number">
+    <div class="text-danger" *ngIf="createProduct.get('productid').dirty && !createProduct.get('productid').valid">
+      Invalid Product Number
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" formControlName="productname" placeholder="Product Name">
+    <div class="text-danger" *ngIf="createProduct.get('productname').dirty && !createProduct.get('productname').valid">
+      Invalid Product Name
+    </div>
+  </div>
+
+  <div class="form-group">
+    <textarea formControlName="description" class="form-control" placeholder="Description of Product"></textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="number" class="form-control" formControlName="price" placeholder="Product price">
+    <div class="text-danger" *ngIf="createProduct.get('price').dirty && !createProduct.get('price').valid">
+      Invalid Product Price
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="form-control btn btn-primary" [disabled]="!createProduct.valid">Add Product</button>
+  </div>
+
+</form>

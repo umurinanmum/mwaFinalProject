@@ -28,6 +28,7 @@ let joi = require('joi');
                 }
               ],
   "adduser": "userid",
+  "price": "1"
   ...
 }
 */
@@ -90,11 +91,12 @@ router.put('/', (req, res) => {
 
 function validateProduct(data){
     const schema = {
-        productid: joi.number().integer().min(1).required().toArray,
+        productid: joi.number().integer().min(1).required(),
         productname: joi.string().min(3).required(),
         description: joi.string().min(3).required(),
         postdate: joi.string().min(3).required(),
-        adduser: joi.string().min(3).required()
+        adduser: joi.string().min(3).required(),
+        price: joi.number().integer().min(1).required()
     };
 
     return joi.validate(data);

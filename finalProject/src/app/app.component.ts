@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
 import { MwaHttpServiceService } from './mwa-http-service.service';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+// <a [routerLink] = "['login']"> login </a>
+// <a [routerLink] = "['register']"> register </a>
+
 
 @Component({
   selector: 'app-root',
   template: `
-  <div>Login Form</div>
-  <a [routerLink] = "['products']"> PRODUCTS </a>
+ 
   
-  <router-outlet></router-outlet>
-  `,
+  <router-outlet>
+  
+  </router-outlet>
+  ` ,
   styles: []
 })
 export class AppComponent {
-  title = 'finalProject';
 
-  constructor(http : MwaHttpServiceService){
-    http.get('?results=10').subscribe(data =>{console.log(data)});
-  }
 
 
 
