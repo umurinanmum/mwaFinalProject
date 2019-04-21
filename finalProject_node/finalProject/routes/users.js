@@ -12,7 +12,8 @@ router.post('/login', function (req, res, next) {
   //console.log(mail + ' ' + password);
   db.getConnection(collectionName).then(data => {
     data.findOne({ 'mail': mail, 'password': password }).then(userInDb => {
-      res.json(mwaJwtManager.generate(userInDb));
+      var token =mwaJwtManager.generate(userInDb);
+      res.json(token);
     });
   });
 });

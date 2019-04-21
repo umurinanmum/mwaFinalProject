@@ -3,11 +3,16 @@ var jwt = require('jsonwebtoken');
 
 const secret = 'mwa_secret';
 
-class MwaJwtManager{
+class MwaJwtManager {
 
-    generate(user){
+    generate(user) {
         var token = jwt.sign(user, secret);
         return token;
+    }
+
+    verify(token) {
+        var user = jwt.verify(token, secret);
+        return user;
     }
 
 }
