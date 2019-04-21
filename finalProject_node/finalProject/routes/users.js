@@ -3,6 +3,8 @@ var router = express.Router();
 
 const db = require('../db/DbHelper.js');
 const mwaJwtManager = require('../jwt/MwaJwtManager');
+const mwaResult = require('../core/MwaResult');
+const resultStatus = require('../core/ResultStatusEnum');
 
 const collectionName = 'user';
 
@@ -13,7 +15,9 @@ router.post('/login', function (req, res, next) {
   db.getConnection(collectionName).then(data => {
     data.findOne({ 'mail': mail, 'password': password }).then(userInDb => {
       var token =mwaJwtManager.generate(userInDb);
-      res.json(token);
+      mwaResult.data = token;
+      mwaResult.status = resultStatus.SUCCESS;
+      res.json(mwaResult);
     });
   });
 });
