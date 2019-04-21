@@ -5,6 +5,7 @@ const db = require('../db/DbHelper.js');
 const mwaJwtManager = require('../jwt/MwaJwtManager');
 const Mwa_Result = require('../core/MwaResult');
 const resultStatus = require('../core/ResultStatusEnum');
+const userManager = require('../userManager/UserManager');
 
 const collectionName = 'user';
 
@@ -26,6 +27,13 @@ router.post('/login', function (req, res, next) {
         res.json(mwaResult);
       }
     });
+  });
+});
+
+router.post('/register', function (req, res, next) {
+  const user = req.body;
+  userManager.register(user).then(result => {
+    res.json(result);
   });
 });
 
