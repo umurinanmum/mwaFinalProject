@@ -7,4 +7,4 @@ class MwaResult {
     }
 }
 
-module.exports = new MwaResult();
+module.exports = MwaResult;

@@ -21,6 +21,11 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.http.post('users/login',this.loginForm.value).subscribe(result =>{
+      if(result.status === 'SUCCESS'){
+        localStorage.setItem('token',result.data);
+      }else{
+        console.log('login failed');
+      }
       console.log(result);
     });
 
