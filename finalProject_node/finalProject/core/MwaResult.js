@@ -5,7 +5,6 @@ class MwaResult {
         this.status = resultStatusEnum.UNKNOWN_ERROR;
         this.data = {};
     }
-
 }
 
 module.exports = new MwaResult();

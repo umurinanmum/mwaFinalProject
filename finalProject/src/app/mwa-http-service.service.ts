@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MwaHttpServiceService {
 
-  private baseUrl: string = "https://randomuser.me/api/";
+  private baseUrl: string = "http://localhost:3000/api/";
 
   constructor(private client: HttpClient) { }
 

@@ -12,14 +12,19 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(http: MwaHttpServiceService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private http: MwaHttpServiceService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = formBuilder.group({
-      'mail': ['', Validators.compose([Validators.required, Validators.email])],
-      'password': ['']
+      'mail': ['umurinan@gmail.com', Validators.compose([Validators.required, Validators.email])],
+      'password': ['123456']
     });
   }
 
   onSubmit(): void {
+    this.http.post('users/login',this.loginForm.value).subscribe(result =>{
+      console.log(result);
+    });
+
+
     console.log(this.loginForm.value);
     //this.router.navigate(['products']);
   }
