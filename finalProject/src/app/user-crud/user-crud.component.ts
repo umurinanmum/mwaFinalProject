@@ -9,10 +9,10 @@ import { NotificationService } from '../notification/notification-service';
   styles: ['']
 })
 export class UserCrudComponent implements OnInit {
-  
+
   userList: any;
 
-  constructor(private http: MwaHttpServiceService,private notificationService : NotificationService) { }
+  constructor(private http: MwaHttpServiceService, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.http.get('users').subscribe((data: any) => {
@@ -22,19 +22,22 @@ export class UserCrudComponent implements OnInit {
     });
   }
 
-  onDelete(mail){
-
-    this.notificationService.deleteResult.subscribe(data=>{
-      if(data){
-          this.notificationService.sendMessage('Deleted','success');
+  onDelete(id) {
+    //console.log('delete called');
+    this.notificationService.deleteResult.subscribe(data => {
+      //console.log('callback called');
+      if (data) {
+        this.http.delete('users/' + id).subscribe((result: any) => {
+          if (result.status === 'SUCCESS') {
+             this.notificationService.sendMessage('Deleted', 'success');
+          }
+        });
       }
-      console.log('delete result : ' + data);
-    }); 
-
-   this.notificationService.deleteConfirmation();
+    });
+    this.notificationService.deleteConfirmation();
   }
 
-  onUpdate(user){
+  onUpdate(user) {
 
   }
 

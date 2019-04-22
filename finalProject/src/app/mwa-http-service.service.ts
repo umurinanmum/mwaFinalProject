@@ -23,7 +23,7 @@ export class MwaHttpServiceService {
   }
 
   delete(path: string) {
-    return this.client.delete(path);
+    return this.client.delete(this.baseUrl + path);
   }
 
 }
