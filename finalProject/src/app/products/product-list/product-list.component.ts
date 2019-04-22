@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MwaHttpServiceService } from '../../mwa-http-service.service';
-import { Product } from '../../model/product.model';
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-list',

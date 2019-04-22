@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MwaHttpServiceService} from '../../mwa-http-service.service';
 import {ActivatedRoute} from '@angular/router';
-import {Product} from "../../model/product.model";
+import {Product} from "../../models/product.model";
 
 @Component({
   selector: 'app-product-details',
@@ -9,17 +9,17 @@ import {Product} from "../../model/product.model";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  //productDetails: any;
+  productDetails: any;
 
-  productDetails: Product = {
-    productid: null,
-    productname: null,
-    description?: null,
-    postdate: null,
-    adduser: null,
-    price: null,
-    photopath?: ''
-  };
+  // productDetails: Product = {
+  //   productid: null,
+  //   productname: null,
+  //   description?: null,
+  //   postdate: null,
+  //   adduser: null,
+  //   price: null,
+  //   photopath?: ''
+  // };
 
   constructor(private productClient: MwaHttpServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe(p => {

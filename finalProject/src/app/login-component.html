@@ -4,13 +4,14 @@
     <div class="wrapper fadeInDown">
 
         <div class="fadeIn first">
-             <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> &ndash;&gt;-->
+            <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
         </div>
 
         <div id="formContent">
             <form [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
 
                 <div *ngIf="!loginForm.get('mail').valid && loginForm.dirty ">Check Your Mail</div>
+
                 <input type="text" name="mail" [formControl]="loginForm.get('mail')" class="fadeIn first"
                     placeholder="Mail" />
 
@@ -23,6 +24,7 @@
 
             <div id="formFooter">
                 <input type="button" class="fadeIn forth" value="Still Not A Member ?" (click)='onRegister()' />
+                <a [routerLink] = "['/users/']" > Test USer</a>
             </div>
         </div>
     </div>

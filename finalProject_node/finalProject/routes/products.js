@@ -1,6 +1,5 @@
 let router = require('express').Router();
 let joi = require('joi');
-//let ObjectID = require('mongodb').ObjectID;
 
 /*
 //Users collection
@@ -32,34 +31,63 @@ let joi = require('joi');
 }
 */
 
+const db = require('../db/DbHelper.js');
+const mwaJwtManager = require('../jwt/MwaJwtManager');
+const Mwa_Result = require('../core/MwaResult');
+const resultStatus = require('../core/ResultStatusEnum');
+const userManager = require('../userManager/UserManager');
+
+const collectionName = 'products';
+
 router.get('/', (req, res) => {
-    req.db.collection('products')
-       .find({})
-       .toArray()
-       .then(data => res.json(data))
-       .catch(err => res.status(500).json(err));
+
+    db.getConnection(collectionName).then(data => {
+        data.find({})
+            .toArray()
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err));
+    });
+
+    // req.db.collection('products')
+    //    .find({})
+    //    .toArray()
+    //    .then(data => res.json(data))
+    //    .catch(err => res.status(500).json(err));
 });
 
 router.get('/:productid', (req, res) => {
     if (!req.params.productid)
         return res.status(400).json({success: "ProductID parameter is missing."});
 
-    req.db.collection('products')
-        .findOne({ productid: req.params.productid }, (err, data) => {
+    db.getConnection(collectionName).then(data => {
+        data.findOne({ productid: req.params.productid }, (err, data) => {
             if(err) return res.status(500).json(err);
             res.json(data);
         });
+    });
+
+    // req.db.collection('products')
+    //     .findOne({ productid: req.params.productid }, (err, data) => {
+    //         if(err) return res.status(500).json(err);
+    //         res.json(data);
+    //     });
 });
 
 router.delete('/:productid', (req, res) => {
     if (!req.params.productid)
         return res.status(400).json({success: "ProductID parameter is missing."});
 
-    req.db.collection('products')
-        .deleteOne({ productid: req.params.productid}, (err) => {
+    db.getConnection(collectionName).then(data => {
+        data.deleteOne({ productid: req.params.productid}, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'deleted'});
         });
+    });
+    // req.db.collection('products')
+    //     .deleteOne({ productid: req.params.productid}, (err) => {
+    //         if(err) return res.status(500).json(err);
+    //         res.json({status: 1, success: 'deleted'});
+    //     });
 });
 
 router.post('/', (req, res) => {
@@ -68,11 +96,17 @@ router.post('/', (req, res) => {
     let {err} = validateProduct(req.body);
     if(err) return res.status(400).json(error.details[0].message);
 
-    req.db.collection('products')
-        .insert(req.body, (err) => {
+    db.getConnection(collectionName).then(data => {
+        data.insert(req.body, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'inserted'});
         });
+    });
+    // req.db.collection('products')
+    //     .insert(req.body, (err) => {
+    //         if(err) return res.status(500).json(err);
+    //         res.json({status: 1, success: 'inserted'});
+    //     });
 });
 
 router.put('/', (req, res) => {
@@ -81,11 +115,17 @@ router.put('/', (req, res) => {
     let {err} = validateProduct(req.body);
     if(err) return res.status(400).json(error.details[0].message);
 
-    req.db.collection('products')
-        .update({ productid: req.body.productid}, req.body, (err) => {
+    db.getConnection(collectionName).then(data => {
+        data.update({ productid: req.body.productid}, req.body, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'updated'});
         });
+    });
+    // req.db.collection('products')
+    //     .update({ productid: req.body.productid}, req.body, (err) => {
+    //         if(err) return res.status(500).json(err);
+    //         res.json({status: 1, success: 'updated'});
+    //     });
 });
 
 function validateProduct(data){

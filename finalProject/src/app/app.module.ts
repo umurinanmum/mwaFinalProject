@@ -8,11 +8,15 @@ import { TokenInterceptor } from './token-interceptor';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ProductComponent } from 'src/app/product/product-create/product.component';
+
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
-import { ProductListComponent } from "./product/product-list/product-list.component";
-import {ProductDetailsComponent} from "./product/product-details/product-details.component";
+import { NotificationComponent } from './notification/notification.component';
+import { UserCrudComponent } from './user-crud/user-crud.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import {ProductDetailsComponent} from './products/product-details/product-details.component';
+import {ProductComponent} from './products/product-create/product.component';
+
 
 const MWA_ROUTES = [
   { path: 'products', component: ProductListComponent },
@@ -20,12 +24,14 @@ const MWA_ROUTES = [
   { path: 'products/:productid', component: ProductDetailsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'users', component: UserCrudComponent },
   { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, ProductComponent, RegisterComponent, LoginComponent, ProductListComponent, ProductDetailsComponent
+    AppComponent, ProductComponent, RegisterComponent, LoginComponent,
+    NotificationComponent, UserCrudComponent,ProductListComponent , ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
