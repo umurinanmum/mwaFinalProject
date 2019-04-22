@@ -11,6 +11,7 @@ export class MwaHttpServiceService {
   constructor(private client: HttpClient) { }
 
   get(path: string) {
+    console.log('get: ' + this.baseUrl + path);
     return this.client.get(this.baseUrl + path);
   }
 

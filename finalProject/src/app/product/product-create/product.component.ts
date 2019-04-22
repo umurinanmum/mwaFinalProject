@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import { MwaHttpServiceService } from '../mwa-http-service.service';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import { MwaHttpServiceService } from '../../mwa-http-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,13 @@ import { MwaHttpServiceService } from '../mwa-http-service.service';
 
 export class ProductComponent {
    createProduct: FormGroup;
-   pricePattern = '/^\d+\.\d{0,2}$/';
 
-   constructor(private fb: FormBuilder, private service: MwaHttpServiceService) {
+   constructor(private fb: FormBuilder, private service: MwaHttpServiceService, private router: Router) {
       this.createProduct = this.fb.group({
         'productid': ['', Validators.required],
         'productname': ['', Validators.required],
         'description': [''],
-        'price': ['0', Validators.compose([Validators.required, Validators.pattern(this.pricePattern)])]
+        'price': ['0', Validators.required]
       });
    };
 
@@ -29,13 +29,18 @@ export class ProductComponent {
         'productname': this.createProduct.get('productname').value,
         'description': this.createProduct.get('description').value,
         'adduser': 1,
-        'price': this.createProduct.get('price').value
+        'price': this.createProduct.get('price').value,
+        'postdate': new Date()
       };
       console.log('onCreateProduct');
       console.log(body);
       this.service.post('/products', body).subscribe(
-        (err) => {console.log(err);}
+        (err) => {console.log(err);},
+        (result => {
+          console.log(result);
+        })
       );
+      //this.router.navigate(['/products']);
     };
 
     onEditProduct() {

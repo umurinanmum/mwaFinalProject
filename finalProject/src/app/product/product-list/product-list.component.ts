@@ -26,23 +26,7 @@ export class ProductListComponent implements OnInit {
       }
 
     );
-    //this.entryList = this.getProducts();
   }
-
-  // Fetch all existing comments
-  // getProducts(): Observable<ProductModel[]> {
-  //   return this.productClient.get('/products')
-  //     .subscribe(
-  //     (res: Response) => {
-  //       return res;
-  //     },
-  //     (error) => {
-  //       console.log('Error occurred while retrieving product data from api');
-  //       console.log(error);
-  //     }
-  //
-  //   );
-  // }
 
   ngOnInit() {
   }

@@ -5,5 +5,6 @@ export class Product {
   postdate: string;
   adduser: string;
   price: number;
+  photopath?: string;
 };
 

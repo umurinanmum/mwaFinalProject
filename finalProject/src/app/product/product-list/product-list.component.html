@@ -10,6 +10,7 @@
             <th scope="col">Product name</th>
             <th scope="col">Product description</th>
             <th scope="col">Price</th>
+            <th scope="col">Event</th>
           </tr>
         </thead>
         <tbody>
@@ -18,8 +19,10 @@
             <td>{{entry.productname}}</td>
             <td>{{entry.description}}</td>
             <td>{{entry.price}}</td>
+            <td><a [routerLink]="['/products', entry.productid]">[ Edit ]</a></td>
           </tr>
         </tbody>
       </table>
   </div>
 </div>
+<router-outlet></router-outlet>

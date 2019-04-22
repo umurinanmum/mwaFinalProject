@@ -8,14 +8,16 @@ import { TokenInterceptor } from './token-interceptor';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ProductComponent } from 'src/app/product/product.component';
+import { ProductComponent } from 'src/app/product/product-create/product.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { ProductListComponent } from "./product/product-list/product-list.component";
+import {ProductDetailsComponent} from "./product/product-details/product-details.component";
 
 const MWA_ROUTES = [
   { path: 'products', component: ProductListComponent },
   { path: 'product/add', component: ProductComponent },
+  { path: 'products/:productid', component: ProductDetailsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: LoginComponent }
@@ -23,7 +25,7 @@ const MWA_ROUTES = [
 
 @NgModule({
   declarations: [
-    AppComponent, ProductComponent, RegisterComponent, LoginComponent, ProductListComponent
+    AppComponent, ProductComponent, RegisterComponent, LoginComponent, ProductListComponent, ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
