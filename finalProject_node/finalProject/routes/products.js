@@ -20,9 +20,9 @@ let joi = require('joi');
   "postdate": "",
   "comments": [
                 {
-                  "commentid": "1",
+                  "_id": "1",
                   "userid": "userid",
-                  "text": "",
+                  "comment": "",
                   "postdate": "",
                   "username":"username"
                 }
