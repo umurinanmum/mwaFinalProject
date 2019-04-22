@@ -9,7 +9,7 @@ import { MwaHttpServiceService } from '../mwa-http-service.service';
 })
 
 export class ProductComponent {
-  createProduct: FormGroup;
+   createProduct: FormGroup;
    pricePattern = '/^\d+\.\d{0,2}$/';
 
    constructor(private fb: FormBuilder, private service: MwaHttpServiceService) {
@@ -23,16 +23,19 @@ export class ProductComponent {
 
 
     onCreateProduct() {
-      console.log('onCreateProduct');
       let body: any;
-      // body = {
-      //   'productid': this.createProduct.get('productid').value,
-      //   'productname': this.createProduct.get('productname').value,
-      //   'description': this.createProduct.get('description').value,
-      //   'price': this.createProduct.get('price').value
-      // };
+      body = {
+        'productid': this.createProduct.get('productid').value,
+        'productname': this.createProduct.get('productname').value,
+        'description': this.createProduct.get('description').value,
+        'adduser': 1,
+        'price': this.createProduct.get('price').value
+      };
+      console.log('onCreateProduct');
       console.log(body);
-      this.service.post('/products', body);
+      this.service.post('/products', body).subscribe(
+        (err) => {console.log(err);}
+      );
     };
 
     onEditProduct() {

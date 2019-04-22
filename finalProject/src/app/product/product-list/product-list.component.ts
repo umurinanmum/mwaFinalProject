@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MwaHttpServiceService} from '../../mwa-http-service.service';
-import { map } from 'rxjs/operators';
-import {forEach} from "@angular/router/src/utils/collection";
-import {of} from "rxjs";
+import { MwaHttpServiceService } from '../../mwa-http-service.service';
+import { Product } from '../../model/product.model';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-list',
@@ -10,32 +9,15 @@ import {of} from "rxjs";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  // public entryList: {
-  //     productid: string,
-  //     productname: string,
-  //     description: string,
-  //     price: number
-  //    }[] = new Array();
 
-  // public entryList = new Array();
-  public entryList: any;
+  entryList: any;
 
   constructor(private productClient: MwaHttpServiceService) {
+
     this.productClient.get('/products')
       .subscribe(
       (response: JSON) => {
-        //console.log(response[0]);
 
-        // for(let i = 0; i < response.length; i++) {
-        //   console.log(response[i]);
-        //   this.entryList.push({
-        //     productid: response[i].productid,
-        //     productname: response[i].productname,
-        //     description: response[i].description,
-        //     price: response[i].price
-        //   });
-        // }
-        //
         this.entryList = response;
       },
       (error) => {
@@ -44,7 +26,23 @@ export class ProductListComponent implements OnInit {
       }
 
     );
+    //this.entryList = this.getProducts();
   }
+
+  // Fetch all existing comments
+  // getProducts(): Observable<ProductModel[]> {
+  //   return this.productClient.get('/products')
+  //     .subscribe(
+  //     (res: Response) => {
+  //       return res;
+  //     },
+  //     (error) => {
+  //       console.log('Error occurred while retrieving product data from api');
+  //       console.log(error);
+  //     }
+  //
+  //   );
+  // }
 
   ngOnInit() {
   }

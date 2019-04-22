@@ -10,17 +10,30 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   template: `
- 
-  
-  <router-outlet>
-  
-  </router-outlet>
+
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+          <li>
+            <a routerLink="login"><b>Login</b></a>
+          </li>
+          <li>
+            <a routerLink="register">Register New User</a>
+          </li>
+          <li>
+            <a routerLink="products">List Products</a>
+          </li>
+          <li>
+            <a routerLink="product/add">Create New Product</a>
+          </li>
+        </ul>
+      </nav>
+      <router-outlet></router-outlet>
+    </div>
   ` ,
   styles: []
 })
+
 export class AppComponent {
-
-
-
 
 }
