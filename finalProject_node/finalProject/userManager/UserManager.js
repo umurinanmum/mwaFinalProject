@@ -38,7 +38,7 @@ class UserManager {
     getAllUsers() {
         return new Promise((resolve, rej) => {
             db.getConnection(collectionName).then(connection => {
-                connection.find().toArray((err, data) => {
+                connection.find({'isDeleted' : false, 'isDeleted' : {$exists : false}}).toArray((err, data) => {
                     let mwaResult = new Mwa_Result();
                     mwaResult.data = data;
                     mwaResult.status = resultStatus.SUCCESS;
