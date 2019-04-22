@@ -1,30 +1,32 @@
-<html>
-
-<body>
-  <div class="wrapper fadeInDown">
-    <div id="formContent">
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Register New User</h3>
+    </div>
+    <div id="formContent" class="panel-body">
       <form [formGroup]="registerForm" (ngSubmit)='onSubmit()'>
-
-        <div *ngIf="!registerForm.get('mail').valid && registerForm.dirty ">Check Your Mail</div>
-        <input type="text" name="mail" [formControl]="registerForm.get('mail')" class="fadeIn first"
-          placeholder="Mail" />
-
-        <input type="text" name="password" [formControl]="registerForm.get('password')" class="fadeIn second"
-          placeholder="Password" />
-
-        <input type="text" name="firstName" [formControl]="registerForm.get('firstName')" class="fadeIn second"
-          placeholder="First Name" />
-
-        <input type="text" name="lastName" [formControl]="registerForm.get('lastName')" class="fadeIn second"
-          placeholder="Last Name" />
-
-        <input type="submit" [disabled]="!registerForm.valid" class="fadeIn third" value="Register" />
-
+        <div class="form-group">
+          <label class="control-label">Email: </label>
+          <input type="text" name="mail" [formControl]="registerForm.get('mail')" class="form-control"/>
+          <div *ngIf="!registerForm.get('mail').valid && registerForm.dirty ">Check Your Mail</div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Password: </label>
+          <input type="text" name="password" [formControl]="registerForm.get('password')" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">First Name: </label>
+          <input type="text" name="firstName" [formControl]="registerForm.get('firstName')" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Last Name: </label>
+          <input type="text" name="lastName" [formControl]="registerForm.get('lastName')" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <input type="submit" [disabled]="!registerForm.valid" class="btn btn-primary" value="Register" />
+        </div>
       </form>
-
     </div>
   </div>
+</div>
 
-</body>
-
-</html>
