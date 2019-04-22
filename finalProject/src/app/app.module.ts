@@ -20,13 +20,13 @@ import {ProductComponent} from './products/product-create/product.component';
 
 
 const MWA_ROUTES = [
+  { path: 'products', component: ProductListComponent },
+  { path: 'product/add', component: ProductComponent },
+  { path: 'products/:productid', component: ProductDetailsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'users', component: UserCrudComponent },
-  { path: '**', component: LoginComponent },
-  { path: 'products', component: ProductListComponent },
-  { path: 'product/add', component: ProductComponent },
-  { path: 'products/:productid', component: ProductDetailsComponent }
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
