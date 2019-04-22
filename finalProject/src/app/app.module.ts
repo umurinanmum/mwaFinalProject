@@ -13,18 +13,20 @@ import { ProductComponent } from 'src/product/product.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { NotificationComponent } from './notification/notification.component';
+import { UserCrudComponent } from './user-crud/user-crud.component';
 
 
 const MWA_ROUTES = [
   { path: 'products', component: ProductComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'users', component: UserCrudComponent },
   { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, ProductComponent, RegisterComponent, LoginComponent, NotificationComponent
+    AppComponent, ProductComponent, RegisterComponent, LoginComponent, NotificationComponent, UserCrudComponent
   ],
   imports: [
     BrowserModule,

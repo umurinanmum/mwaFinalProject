@@ -39,7 +39,9 @@ router.post('/register', function (req, res, next) {
 
 
 router.get('/', function (req, res, next) {
-  db.getConnection(collectionName).then(data => { data.find({}).toArray((err, data) => { res.json(data) }) })
+   userManager.getAllUsers().then(result=>{
+    res.json(result);
+   });
 });
 
 module.exports = router;

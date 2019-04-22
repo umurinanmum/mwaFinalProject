@@ -16,19 +16,34 @@ class UserManager {
                         let mwaResult = new Mwa_Result();
                         mwaResult.status = resultStatus.ALREADY_ADDED;
                         resolve(mwaResult);
-                    }else{
-                        connection.insertOne(user,(err,result)=>{
-                            if(err){
+                    } else {
+                        connection.insertOne(user, (err, result) => {
+                            if (err) {
                                 let mwaResult = new Mwa_Result();
                                 mwaResult.status = resultStatus.UNKNOWN_ERROR;
                                 resolve(mwaResult);
-                            }else{
+                            } else {
                                 let mwaResult = new Mwa_Result();
                                 mwaResult.status = resultStatus.SUCCESS;
                                 resolve(mwaResult);
                             }
                         });
                     }
+                });
+            });
+        });
+    }
+
+
+    getAllUsers() {
+        return new Promise((resolve, rej) => {
+            //already added control
+            db.getConnection(collectionName).then(connection => {
+                connection.find().toArray((err,data) => {
+                        let mwaResult = new Mwa_Result();
+                        mwaResult.data = data;
+                        mwaResult.status = resultStatus.SUCCESS;
+                        resolve(mwaResult);
                 });
             });
         });
