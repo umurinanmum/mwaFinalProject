@@ -47,7 +47,7 @@ router.get('/', function (req, res, next) {
 router.delete('/:id', function (req, res, next) {
   var id = req.params.id;
    
-  userManager.getAllUsers().then(result=>{
+  userManager.delete(id).then(result=>{
    res.json(result);
   });
 });
