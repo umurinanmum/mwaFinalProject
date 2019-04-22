@@ -12,9 +12,12 @@ import { Router } from '@angular/router';
   template: `
  
   <app-notification></app-notification>
-  
+
   <div class="container-fluid">
     <nav class="navbar navbar-inverse">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">PRODUCT REVIEW APP</a>
+      </div>
       <ul class="nav navbar-nav">
         <li>
           <a routerLink="login"><b>Login</b></a>
@@ -23,7 +26,10 @@ import { Router } from '@angular/router';
           <a routerLink="register">Register New User</a>
         </li>
         <li>
-          <a routerLink="products">List Products</a>
+          <a routerLink="users">User List</a>
+        </li>
+        <li>
+          <a routerLink="products">Product List</a>
         </li>
         <li>
           <a routerLink="product/add">Create New Product</a>
@@ -32,7 +38,6 @@ import { Router } from '@angular/router';
     </nav>
     <router-outlet></router-outlet>
   </div>
-
   ` ,
   styles: []
 })

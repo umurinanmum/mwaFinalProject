@@ -24,8 +24,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private productClient: MwaHttpServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe(p => {
 
-      this.productClient.get('/products/' + p['productid']).subscribe(
-        data => { this.productDetails = data; },
+      this.productClient.get('products/' + p['productid']).subscribe(
+        data => { this.productDetails = data; console.log(data); },
         err => { console.log(err); }
       );
 

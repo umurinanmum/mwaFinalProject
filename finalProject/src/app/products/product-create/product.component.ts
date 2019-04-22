@@ -47,22 +47,15 @@ export class ProductComponent implements OnInit {
       };
       console.log('onCreateProduct');
       console.log(body);
-      this.service.post('/products', body).subscribe(
+      this.service.post('products', body).subscribe(
         (err) => {console.log(err);},
         (result => {
           console.log(result);
         })
       );
-      //this.router.navigate(['/products']);
+      //this.router.navigate(['products']);
     };
 
-    onEditProduct() {
-      console.log('onEditProduct');
-    };
-
-    onDeleteProduct() {
-      console.log('onDeleteProduct');
-    };
 
     // validatePrice(control: FormControl): {[s: string]: boolean} {
     //   //if(control.value)

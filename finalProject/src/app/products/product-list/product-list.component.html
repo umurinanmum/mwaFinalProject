@@ -10,7 +10,7 @@
             <th scope="col">Product name</th>
             <th scope="col">Product description</th>
             <th scope="col">Price</th>
-            <th scope="col">Event</th>
+            <th scope="col" colspan="2">Event</th>
           </tr>
         </thead>
         <tbody>
@@ -20,9 +20,18 @@
             <td>{{entry.description}}</td>
             <td>{{entry.price}}</td>
             <td><a [routerLink]="['/products', entry.productid]">[ Detail ]</a></td>
+            <td><a (click)="onDeleteProduct(entry.productid)">[ Delete ]</a></td>
+            <td><a [routerLink]="['/products/edit', entry.productid]">[ Edit ]</a></td>
           </tr>
         </tbody>
+        <tfoot>
+          <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </tfoot>
       </table>
+
   </div>
 </div>
 <router-outlet></router-outlet>

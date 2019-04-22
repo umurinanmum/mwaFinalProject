@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MwaHttpServiceService } from '../../mwa-http-service.service';
+import {Router} from "@angular/router";
+import {NotificationService} from "../../notification/notification-service";
 
 @Component({
   selector: 'app-product-list',
@@ -10,9 +12,9 @@ export class ProductListComponent implements OnInit {
 
   entryList: any;
 
-  constructor(private productClient: MwaHttpServiceService) {
+  constructor(private http: MwaHttpServiceService, private router: Router, private notificationService: NotificationService) {
 
-    this.productClient.get('/products')
+    this.http.get('products')
       .subscribe(
       (response: JSON) => {
 
@@ -28,5 +30,26 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+  onEditProduct(productid) {
+    console.log('onEditProduct: ' + productid);
+  };
+
+  onDeleteProduct(productid) {
+    console.log('onDeleteProduct: ' + productid);
+    this.http.delete('products/' + productid).subscribe(
+      result => {
+        console.log('deleted');
+        this.notificationService.sendMessage('Deleted', 'success');
+        },
+      err => {
+        console.log(err);
+        this.notificationService.sendMessage('Error', err);
+      }
+    );
+
+    //this.router.navigate(['products']);
+  };
 
 }
