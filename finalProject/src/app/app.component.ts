@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   template: `
  
+  <app-notification></app-notification>
   
   <router-outlet>
   

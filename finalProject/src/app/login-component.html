@@ -11,6 +11,7 @@
             <form [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
 
                 <div *ngIf="!loginForm.get('mail').valid && loginForm.dirty ">Check Your Mail</div>
+
                 <input type="text" name="mail" [formControl]="loginForm.get('mail')" class="fadeIn first"
                     placeholder="Mail" />
 

@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from 'src/product/product.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 const MWA_ROUTES = [
@@ -23,7 +24,7 @@ const MWA_ROUTES = [
 
 @NgModule({
   declarations: [
-    AppComponent, ProductComponent, RegisterComponent, LoginComponent
+    AppComponent, ProductComponent, RegisterComponent, LoginComponent, NotificationComponent
   ],
   imports: [
     BrowserModule,

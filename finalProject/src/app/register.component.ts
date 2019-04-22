@@ -23,7 +23,7 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    this.http.post('users/register',this.registerForm.value).subscribe(result =>{
+    this.http.post('users/register',this.registerForm.value).subscribe((result: any) =>{
       if(result.status === 'SUCCESS'){
         
       }else{
