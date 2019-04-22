@@ -37,6 +37,7 @@ export class ProductListComponent implements OnInit {
   };
 
   onDeleteProduct(productid) {
+
     console.log('onDeleteProduct: ' + productid);
     this.http.delete('products/' + productid).subscribe(
       result => {

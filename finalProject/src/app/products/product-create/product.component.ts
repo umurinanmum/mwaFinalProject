@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { MwaHttpServiceService } from '../../mwa-http-service.service';
 import { Router } from '@angular/router';
+import {NotificationService} from "../../notification/notification-service";
 
 //import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
 export class ProductComponent implements OnInit {
    createProduct: FormGroup;
 
-   constructor(private fb: FormBuilder, private service: MwaHttpServiceService, private router: Router) {
+   constructor(private fb: FormBuilder, private service: MwaHttpServiceService,
+               private router: Router, private notificationService: NotificationService) {
       this.createProduct = this.fb.group({
         'productid': ['', Validators.required],
         'productname': ['', Validators.required],
@@ -48,10 +50,15 @@ export class ProductComponent implements OnInit {
       console.log('onCreateProduct');
       console.log(body);
       this.service.post('products', body).subscribe(
-        (err) => {console.log(err);},
         (result => {
+          this.notificationService.sendMessage('Result', result);
           console.log(result);
-        })
+        }),
+        (err) => {
+          this.notificationService.sendMessage('Error', err);
+          this.router.navigate(['products']);
+          console.log(err);
+        }
       );
       //this.router.navigate(['products']);
     };

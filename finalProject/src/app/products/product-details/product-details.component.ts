@@ -9,7 +9,7 @@ import {Product} from "../../models/product.model";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  productDetails: any;
+  public productDetails: any;
 
   // productDetails: Product = {
   //   productid: null,
