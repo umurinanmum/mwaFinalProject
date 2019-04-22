@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   template: `
  
   <app-notification></app-notification>
-
+  
   <div class="container-fluid">
     <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
@@ -32,6 +32,7 @@ import { Router } from '@angular/router';
     </nav>
     <router-outlet></router-outlet>
   </div>
+
   ` ,
   styles: []
 })

@@ -1,7 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
+
 //const client = new MongoClient('mongodb+srv://mwa:mwa@cluster0-rtumx.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
 const client = new MongoClient('mongodb+srv://test:test@mongodb-0besx.mongodb.net/mwa', { useNewUrlParser: true });
+
 const str = require('querystring')
 class DbHelper {
 
@@ -16,4 +18,6 @@ class DbHelper {
 
 }
 
+
 module.exports = new DbHelper();
+
