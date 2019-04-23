@@ -14,7 +14,7 @@ export class ProductEditComponent implements OnInit {
   //@Input() product: Product;
 
   public editProduct: FormGroup;
-  public productDetails: any;
+  //public productDetails: any;
 
   constructor(private fb: FormBuilder, private service: MwaHttpServiceService,
               private router: Router, private notificationService: NotificationService,
@@ -35,7 +35,11 @@ export class ProductEditComponent implements OnInit {
         const productid = +p.get('productid');
         this.service.get('products/' + productid).subscribe(
           (data) => {
-            this.productDetails = data;
+            //this.productDetails = data;
+            this.editProduct.get('productid').setValue(data['productid']);
+            this.editProduct.get('productname').setValue(data['productname']);
+            this.editProduct.get('description').setValue(data['description']);
+            this.editProduct.get('price').setValue(data['price']);
             console.log(data);
           },
           err => {

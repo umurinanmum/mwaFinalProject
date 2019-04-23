@@ -35,7 +35,12 @@ export class ProductListComponent implements OnInit {
 
 
   onEditProduct(productid) {
-    console.log('onEditProduct: ' + productid);
+    this.router.navigateByUrl('/product/edit/' + productid);
+    //this.router.navigate(['products']);
+  };
+
+  onDetailProduct(productid) {
+    this.router.navigateByUrl('/products/' + productid);
   };
 
   onDeleteProduct(productid) {
