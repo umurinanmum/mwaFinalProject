@@ -1,5 +1,5 @@
 
-<form [formGroup]="productDetails" (ngSubmit)="onEditProduct()" ngNativeValidate>
+<form [formGroup]="editProduct" (ngSubmit)="onEditProduct()" ngNativeValidate>
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Edit Product</h3>
@@ -32,8 +32,9 @@
     </div>
   </div>
 </form>
-{{productDetails.value | json}}
+{{editProduct?.value | json}}
+{{productDetails?.value | json}}
 
-invalid: {{productDetails.get('price').invalid}} <br>
-touched: {{productDetails.get('price').touched}} <br>
-value: {{productDetails.get('price').value}} <br>
+invalid: {{editProduct?.get('price').invalid}} <br>
+touched: {{editProduct?.get('price').touched}} <br>
+value: {{editProduct?.get('price').value}} <br>

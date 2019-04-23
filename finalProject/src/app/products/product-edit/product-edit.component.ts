@@ -11,21 +11,20 @@ import {Product} from '../../models/product.model';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  @Input() product: Product;
+  //@Input() product: Product;
 
-  //public editProduct: FormGroup;
-  productDetails: FormGroup;
+  public editProduct: FormGroup;
+  public productDetails: any;
 
   constructor(private fb: FormBuilder, private service: MwaHttpServiceService,
               private router: Router, private notificationService: NotificationService,
               private route: ActivatedRoute) {
 
-
-    this.productDetails = this.fb.group({
+    this.editProduct = this.fb.group({
       'productid': ['1', Validators.required],
-      'productname': ['', Validators.required],
-      'description': [''],
-      'price': ['0', Validators.required]
+      'productname': ['Car', Validators.required],
+      'description': ['Carasdasd'],
+      'price': ['1000', Validators.required]
     });
 
   };
@@ -35,9 +34,9 @@ export class ProductEditComponent implements OnInit {
       p => {
         const productid = +p.get('productid');
         this.service.get('products/' + productid).subscribe(
-          (data: JSON) => {
+          (data) => {
             this.productDetails = data;
-            //console.log(data);
+            console.log(data);
           },
           err => {
             console.log(err);
@@ -45,16 +44,18 @@ export class ProductEditComponent implements OnInit {
         );
 
       });
+
+
   }
 
   onEditProduct() {
     let body: any;
     body = {
-      'productid': this.productDetails.get('productid').value,
-      'productname': this.productDetails.get('productname').value,
-      'description': this.productDetails.get('description').value,
+      'productid': this.editProduct.get('productid').value,
+      'productname': this.editProduct.get('productname').value,
+      'description': this.editProduct.get('description').value,
       'status': true,
-      'price': this.productDetails.get('price').value
+      'price': this.editProduct.get('price').value
     };
 
     console.log('onEditProduct');
