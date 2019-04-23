@@ -92,7 +92,7 @@ router.put('/', (req, res) => {
     if(err) return res.status(400).json(error.details[0].message);
 
     db.getConnection(collectionName).then(data => {
-        data.update({ productid: req.body.productid}, req.body, (err) => {
+        data.update({ productid: req.body.productid}, {$set: req.body}, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'updated'});
         });
