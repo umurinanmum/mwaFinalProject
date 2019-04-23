@@ -18,7 +18,11 @@ router.post('/login', function (req, res, next) {
       if (userInDb) {
         var token = mwaJwtManager.generate(userInDb);
         let mwaResult = new Mwa_Result();
-        mwaResult.data = token;
+        mwaResult.data = 
+        {
+          'token' : token,
+          'user' : userInDb
+        };
         mwaResult.status = resultStatus.SUCCESS;
         res.json(mwaResult);
       } else {
