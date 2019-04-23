@@ -44,18 +44,19 @@ export class ProductComponent implements OnInit {
         'productname': this.createProduct.get('productname').value,
         'description': this.createProduct.get('description').value,
         'adduser': 1,
+        'status': true,
         'price': this.createProduct.get('price').value,
         'postdate': new Date()
       };
       console.log('onCreateProduct');
       console.log(body);
       this.service.post('products', body).subscribe(
-        (result => {
-          this.notificationService.sendMessage('Result', result);
+        (result) => {
+          this.notificationService.sendMessage(result.toString(), 'success');
           console.log(result);
-        }),
+        },
         (err) => {
-          this.notificationService.sendMessage('Error', err);
+          this.notificationService.sendMessage(err.toString(), 'error');
           this.router.navigate(['products']);
           console.log(err);
         }

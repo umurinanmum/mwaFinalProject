@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 
@@ -39,18 +40,22 @@ export class ProductListComponent implements OnInit {
   onDeleteProduct(productid) {
 
     console.log('onDeleteProduct: ' + productid);
-    this.http.delete('products/' + productid).subscribe(
-      result => {
-        console.log('deleted');
-        this.notificationService.sendMessage('Deleted', 'success');
-        },
-      err => {
-        console.log(err);
-        this.notificationService.sendMessage('Error', err);
-      }
-    );
 
-    //this.router.navigate(['products']);
+    this.notificationService.deleteResult.subscribe(data => {
+      if (data) {
+        this.http.delete('products/' + productid).subscribe(
+          result => {
+            console.log('deleted');
+            this.notificationService.sendMessage('Deleted', 'success');
+          },
+          err => {
+            console.log(err);
+            this.notificationService.sendMessage(err.toString(), 'error');
+          }
+        );
+      }
+    });
+    this.notificationService.deleteConfirmation();
   };
 
 }

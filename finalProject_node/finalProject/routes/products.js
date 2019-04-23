@@ -1,5 +1,6 @@
 let router = require('express').Router();
 let joi = require('joi');
+const db = require('../db/DbHelper.js');
 
 /*
 //Users collection
@@ -20,11 +21,10 @@ let joi = require('joi');
   "postdate": "",
   "comments": [
                 {
-                  "_id": "1",
                   "userid": "userid",
-                  "comment": "",
+                  "text": "",
                   "postdate": "",
-                  "username":"username"
+                  ...
                 }
               ],
   "adduser": "userid",
@@ -32,28 +32,16 @@ let joi = require('joi');
 }
 */
 
-const db = require('../db/DbHelper.js');
-const mwaJwtManager = require('../jwt/MwaJwtManager');
-const Mwa_Result = require('../core/MwaResult');
-const resultStatus = require('../core/ResultStatusEnum');
-const userManager = require('../userManager/UserManager');
-
 const collectionName = 'products';
 
 router.get('/', (req, res) => {
 
     db.getConnection(collectionName).then(data => {
-        data.find({})
+        data.find({status: true})
             .toArray()
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err));
     });
-
-    // req.db.collection('products')
-    //    .find({})
-    //    .toArray()
-    //    .then(data => res.json(data))
-    //    .catch(err => res.status(500).json(err));
 });
 
 router.get('/:productid', (req, res) => {
@@ -67,11 +55,6 @@ router.get('/:productid', (req, res) => {
         });
     });
 
-    // req.db.collection('products')
-    //     .findOne({ productid: req.params.productid }, (err, data) => {
-    //         if(err) return res.status(500).json(err);
-    //         res.json(data);
-    //     });
 });
 
 router.delete('/:productid', (req, res) => {
@@ -79,16 +62,12 @@ router.delete('/:productid', (req, res) => {
         return res.status(400).json({success: "ProductID parameter is missing."});
 
     db.getConnection(collectionName).then(data => {
-        data.deleteOne({ productid: req.params.productid}, (err) => {
+        data.updateOne({ productid: req.params.productid}, {$set: {status:false}}, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'deleted'});
         });
     });
-    // req.db.collection('products')
-    //     .deleteOne({ productid: req.params.productid}, (err) => {
-    //         if(err) return res.status(500).json(err);
-    //         res.json({status: 1, success: 'deleted'});
-    //     });
+
 });
 
 router.post('/', (req, res) => {
@@ -103,11 +82,7 @@ router.post('/', (req, res) => {
             res.json({status: 1, success: 'inserted'});
         });
     });
-    // req.db.collection('products')
-    //     .insert(req.body, (err) => {
-    //         if(err) return res.status(500).json(err);
-    //         res.json({status: 1, success: 'inserted'});
-    //     });
+
 });
 
 router.put('/', (req, res) => {
@@ -122,11 +97,7 @@ router.put('/', (req, res) => {
             res.json({status: 1, success: 'updated'});
         });
     });
-    // req.db.collection('products')
-    //     .update({ productid: req.body.productid}, req.body, (err) => {
-    //         if(err) return res.status(500).json(err);
-    //         res.json({status: 1, success: 'updated'});
-    //     });
+
 });
 
 function validateProduct(data){
@@ -135,7 +106,7 @@ function validateProduct(data){
         productname: joi.string().min(3).required(),
         description: joi.string().min(3).required(),
         postdate: joi.string().min(3).required(),
-        adduser: joi.string().min(3).required()
+        adduser: joi.string().min(1).required()
     };
 
     return joi.validate(data);
