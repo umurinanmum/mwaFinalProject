@@ -8,7 +8,7 @@ import {Product} from "../../models/product.model";
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent  {
+export class ProductDetailsComponent implements OnInit {
   public productDetails: any;
 
   // productDetails: Product = {
@@ -20,8 +20,11 @@ export class ProductDetailsComponent  {
   //   price: null,
   //   photopath?: ''
   // };
-  
-  constructor(private productClient: MwaHttpServiceService, private route: ActivatedRoute) {
+
+  constructor(private productClient: MwaHttpServiceService,
+              private route: ActivatedRoute) {}
+
+  ngOnInit() {
     this.route.params.subscribe(p => {
 
       this.productClient.get('products/' + p['productid']).subscribe(
@@ -34,3 +37,4 @@ export class ProductDetailsComponent  {
   }
 
 }
+

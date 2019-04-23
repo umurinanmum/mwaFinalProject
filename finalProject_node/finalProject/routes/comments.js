@@ -48,8 +48,8 @@ router.get('/:productid', (req, res) => {
        
         data.findOne({ productid: req.params.productid }, (err, data) => {
             if(err) return res.status(500).json(err);
-            console.log(data);
-           // res.json(data);
+           // console.log(data);
+            res.json(data);
         });
     });
 
