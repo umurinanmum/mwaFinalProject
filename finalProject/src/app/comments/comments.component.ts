@@ -24,25 +24,27 @@ export class CommentsComponent implements OnInit {
      });
      this.router.params.subscribe(p => {
      this.pid=p['productid'];
-     console.log("test "+this.pid);
-      this.http.get('comments/'+this.pid)
-        .subscribe(
-        (response: JSON) => {
-
-          this.entryList = response;console.log("response"+this.pid);
-          console.log(response);
-          console.log("response end");
-        },
-        (error) => {
-          console.log('Error occurred while retrieving product data from api');
-          console.log(error);
-        }
-
-      );
+     this.fetchdata();
+     
     } );
 
      
   };
+  fetchdata(){
+    this.http.get('comments/'+this.pid)
+    .subscribe(
+    (response: JSON) => {
+
+      this.entryList = response;console.log("response"+this.pid);
+      console.log(response);
+      console.log("response end");
+    },
+    (error) => {
+      console.log('Error occurred while retrieving product data from api');
+      console.log(error);
+    }
+  );
+  }
   onCreateComment() {
     let body: any;
     body = {
