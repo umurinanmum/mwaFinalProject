@@ -21,7 +21,8 @@
             <td>{{entry.price}}</td>
             <td><a [routerLink]="['/products', entry.productid]">[ Detail ]</a></td>
             <td><a (click)="onDeleteProduct(entry.productid)">[ Delete ]</a></td>
-            <td><a [routerLink]="['/products/edit', entry.productid]">[ Edit ]</a></td>
+            <!--[product]="entry"-->
+            <td><a [routerLink]="['/product/edit', entry.productid]">[ Edit ]</a></td>
           </tr>
         </tbody>
         <tfoot>
@@ -35,4 +36,4 @@
   </div>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet ></router-outlet>

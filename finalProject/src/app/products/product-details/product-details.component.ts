@@ -21,7 +21,10 @@ export class ProductDetailsComponent implements OnInit {
   //   photopath?: ''
   // };
 
-  constructor(private productClient: MwaHttpServiceService, private route: ActivatedRoute) {
+  constructor(private productClient: MwaHttpServiceService,
+              private route: ActivatedRoute) {}
+
+  ngOnInit() {
     this.route.params.subscribe(p => {
 
       this.productClient.get('products/' + p['productid']).subscribe(
@@ -31,9 +34,6 @@ export class ProductDetailsComponent implements OnInit {
 
     } );
 
-  }
-
-  ngOnInit() {
   }
 
 }
