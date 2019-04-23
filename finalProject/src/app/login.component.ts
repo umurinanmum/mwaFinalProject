@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(private http: MwaHttpServiceService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private notificationService : NotificationService) {
+    private notificationService: NotificationService) {
 
     this.loginForm = formBuilder.group({
       'mail': ['umurinan@gmail.com', Validators.compose([Validators.required, Validators.email])],
@@ -27,9 +27,11 @@ export class LoginComponent {
   onSubmit(): void {
     this.http.post('users/login', this.loginForm.value).subscribe((result: any) => {
       if (result.status === 'SUCCESS') {
-        localStorage.setItem('token', result.data);
+        localStorage.setItem('token', result.data.token);
+        localStorage.setItem('user', result.data.user);
+        console.log(result);
       } else {
-        this.notificationService.sendMessage('Login Failed','error');
+        this.notificationService.sendMessage('Login Failed', 'error');
       }
     });
     //this.router.navigate(['products']);

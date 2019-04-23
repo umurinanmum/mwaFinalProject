@@ -8,8 +8,8 @@ import {Product} from "../../models/product.model";
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
-  productDetails: any;
+export class ProductDetailsComponent  {
+  public productDetails: any;
 
   // productDetails: Product = {
   //   productid: null,
@@ -31,9 +31,6 @@ export class ProductDetailsComponent implements OnInit {
 
     } );
 
-  }
-
-  ngOnInit() {
   }
 
 }

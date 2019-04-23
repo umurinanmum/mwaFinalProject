@@ -1,3 +1,39 @@
-<p>
-  product-edit works!
-</p>
+
+<form [formGroup]="editProduct" (ngSubmit)="onEditProduct()" ngNativeValidate>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Edit Product</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="form-group">
+        <label class="control-label">Product Number: </label>
+        <input type="text" class="form-control" formControlName="productid" required value="{{editProduct?.productid}}" disabled>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Product Name: </label>
+        <input type="text" class="form-control" formControlName="productname" required value="{{editProduct?.productname}}">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Description: </label>
+        <textarea formControlName="description" class="form-control">{{editProduct?.description}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Product price: </label>
+        <input type="number" class="form-control" formControlName="price" required value="{{editProduct?.price}}">
+      </div>
+
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-primary">Update Product</button>
+    </div>
+  </div>
+</form>
+{{editProduct?.value | json}}
+
+invalid: {{editProduct?.get('price').invalid}} <br>
+touched: {{editProduct?.get('price').touched}} <br>
+value: {{editProduct?.get('price').value}} <br>

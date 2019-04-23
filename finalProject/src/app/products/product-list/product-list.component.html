@@ -10,28 +10,29 @@
             <th scope="col">Product name</th>
             <th scope="col">Product description</th>
             <th scope="col">Price</th>
-            <th scope="col" colspan="2">Event</th>
+            <th scope="col">Event</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let entry of entryList; index as i" >
+          <tr *ngFor="let entry of entryList; index as i" (click)="onDetailProduct(entry.productid)" class="pointerCursor">
             <td>{{i + 1}}</td>
             <td>{{entry.productname}}</td>
             <td>{{entry.description}}</td>
             <td>{{entry.price}}</td>
-            <td><a [routerLink]="['/products', entry.productid]">[ Detail ]</a></td>
-            <td><a (click)="onDeleteProduct(entry.productid)">[ Delete ]</a></td>
-            <td><a [routerLink]="['/products/edit', entry.productid]">[ Edit ]</a></td>
+            <td>
+              <button type="button" class="btn btn-info" (click)="onDetailProduct(entry.productid)">Detail</button>&nbsp;
+              <button type="button" class="btn btn-success" (click)="onEditProduct(entry.productid)">Edit</button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="onDeleteProduct(entry.productid)">Delete</button>
+            </td>
           </tr>
         </tbody>
         <tfoot>
-          <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-          </ul>
+        <tr><td></td><td></td><td><button class="btn btn-primary pull-right">Previous</button></td>
+            <td><button class="btn btn-primary">Next</button></td></tr>
         </tfoot>
       </table>
 
   </div>
 </div>
-<router-outlet></router-outlet>
+
+<router-outlet ></router-outlet>
