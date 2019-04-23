@@ -11,29 +11,35 @@
         <!--<div class="col-xs-3">-->
           <!--<img src="../../assets/images/{{productDetails?.photopath}}" width="200px" *ngIf="productDetails?.photopath!=''"/>-->
         <!--</div>-->
-        <div class="col-xs-8">
+        <div class="col-xs-7">
           <div class="row">
-            <div class="col-xs-2">Product Number</div>
+            <div class="col-xs-2"><b>Product Number : </b></div>
             <div class="col-xs-6">{{productDetails?.productid}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-2">Postdate</div>
-            <div class="col-xs-6">{{productDetails?.postdate | date}}</div>
+            <div class="col-xs-2"><b>Product Name : </b></div>
+            <div class="col-xs-6">{{productDetails?.productname}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-2">Description</div>
+            <div class="col-xs-2"><b>Description : </b></div>
             <div class="col-xs-6">{{productDetails?.description}}</div>
           </div>
+
+        </div>
+        <div class="col-xs-5">
           <div class="row">
-            <div class="col-xs-2">User</div>
-            <div class="col-xs-6">{{productDetails?.adduser}}</div>
+            <div class="col-xs-2"><b>Price : </b></div>
+            <div class="col-xs-6">$ {{productDetails?.price}}</div>
           </div>
+          <!--<div class="row">-->
+          <!--<div class="col-xs-2">User</div>-->
+          <!--<div class="col-xs-6">{{productDetails?.adduser}}</div>-->
+          <!--</div>-->
           <div class="row">
-            <div class="col-xs-2">Price</div>
-            <div class="col-xs-6">{{productDetails?.price}}</div>
+            <div class="col-xs-2"><b>Postdate : </b></div>
+            <div class="col-xs-6">{{productDetails?.postdate | date}}</div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
