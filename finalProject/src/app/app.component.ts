@@ -26,13 +26,13 @@ import { Router } from '@angular/router';
           <a routerLink="register">Register New User</a>
         </li>
         <li>
-          <a routerLink="users" [style.visiblity]>User List</a>
+          <a routerLink="users" [ngStyle] = "{'visibility' : isVisible }" >User List</a>
         </li>
         <li>
-          <a routerLink="product/add">Create New Product</a>
+          <a routerLink="product/add" [ngStyle] = "{'visibility' : isVisible }">Create New Product</a>
         </li>
         <li>
-          <a routerLink="products">Product List</a>
+          <a routerLink="products" [ngStyle] = "{'visibility' : isVisible }">Product List</a>
         </li>
       </ul>
     </nav>
@@ -43,7 +43,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  isVisible: boolean = false;
+  isVisible: string = 'hidden';
 
   constructor() {
 
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     var token = localStorage.getItem('token');
     if (token) {
-      this.isVisible = true;
+      this.isVisible = 'visible';
     }
   }
 
