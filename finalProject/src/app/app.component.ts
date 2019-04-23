@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MwaHttpServiceService } from './mwa-http-service.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
           <a routerLink="register">Register New User</a>
         </li>
         <li>
-          <a routerLink="users">User List</a>
+          <a routerLink="users" [style.visiblity]>User List</a>
         </li>
         <li>
           <a routerLink="product/add">Create New Product</a>
@@ -41,8 +41,20 @@ import { Router } from '@angular/router';
   ` ,
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  isVisible: boolean = false;
+
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+    var token = localStorage.getItem('token');
+    if (token) {
+      this.isVisible = true;
+    }
+  }
 
 
 
