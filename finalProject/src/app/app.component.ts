@@ -29,10 +29,10 @@ import { Router } from '@angular/router';
           <a routerLink="users">User List</a>
         </li>
         <li>
-          <a routerLink="products">Product List</a>
+          <a routerLink="product/add">Create New Product</a>
         </li>
         <li>
-          <a routerLink="product/add">Create New Product</a>
+          <a routerLink="products">Product List</a>
         </li>
       </ul>
     </nav>
