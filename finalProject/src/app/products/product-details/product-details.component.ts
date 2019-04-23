@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   //   price: null,
   //   photopath?: ''
   // };
-
+  
   constructor(private productClient: MwaHttpServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe(p => {
 

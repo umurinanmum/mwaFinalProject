@@ -17,6 +17,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import {ProductDetailsComponent} from './products/product-details/product-details.component';
 import {ProductComponent} from './products/product-create/product.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
+import { CommentsComponent } from './comments/comments.component';
 
 const MWA_ROUTES = [
   { path: 'products', component: ProductListComponent },
@@ -32,7 +33,7 @@ const MWA_ROUTES = [
 @NgModule({
   declarations: [
     AppComponent, ProductComponent, RegisterComponent, LoginComponent,
-    NotificationComponent, UserCrudComponent, ProductListComponent, ProductDetailsComponent, ProductEditComponent
+    NotificationComponent, UserCrudComponent, ProductListComponent, ProductDetailsComponent, ProductEditComponent, CommentsComponent
   ],
   imports: [
     BrowserModule,
