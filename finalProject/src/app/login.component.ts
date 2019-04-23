@@ -28,7 +28,7 @@ export class LoginComponent {
     this.http.post('users/login', this.loginForm.value).subscribe((result: any) => {
       if (result.status === 'SUCCESS') {
         localStorage.setItem('token', result.data.token);
-        localStorage.setItem('user', result.data.user);
+        localStorage.setItem('user', JSON.stringify(result.data.user));
         console.log(result);
       } else {
         this.notificationService.sendMessage('Login Failed', 'error');
