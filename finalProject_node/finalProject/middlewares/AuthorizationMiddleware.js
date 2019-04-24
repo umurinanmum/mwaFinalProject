@@ -3,10 +3,16 @@ const jwt = require('../jwt/MwaJwtManager')
 
 class AuthenticateMiddleware {
     authenticate(req, res, next) {
-        if (req.url === '/api/users/login' || req.url === '/api/users/register') {
+
+        console.log('req.url ' + req.url);
+
+        if (req.url === '/api/users/login'
+            || req.url === '/api/users/register'
+            || req.url === '/api/users/login/'
+            || req.url === '/api/users/register/') {
             next();
             return;
-        }else{
+        } else {
             const authHeader = req.headers.authorization
 
             if (!authHeader) {
@@ -30,6 +36,16 @@ class AuthenticateMiddleware {
                         message: 'FORBIDDEN'
                     })
                 }
+
+                if (req.url === '/api/users' || req.url === '/api/users/') {
+                    if (!user.role || user.role != 'admin') {
+                        return res.status(403).json({
+                            status: 403,
+                            message: 'FORBIDDEN'
+                        })
+                    }
+                }
+
                 next();
             }
         }
