@@ -61,13 +61,13 @@ router.get('/:productid', (req, res) => {
 
 });
 
-router.delete('/:reviewid', (req, res) => { console.log("delete");
+router.delete('/:reviewid', (req, res) => { 
     if (!req.params.reviewid)
         return res.status(400).json({success: "ProductID parameter is missing."});
-
+        console.log("delete "+req.params.reviewid);
     db.getConnection(collectionName).then(data => {
         
-        data.update({ },{'$pull':{ 'reviews':{'_id':  ObjectId(req.params.reviewid) }}}, (err) => {
+        data.update({ },{$pull:{ reviews:{_id:  new mongodb.ObjectID(req.params.reviewid) }}},{multi:true}, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'deleted'});
         });

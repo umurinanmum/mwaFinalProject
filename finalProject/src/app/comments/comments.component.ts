@@ -49,7 +49,7 @@ export class CommentsComponent implements OnInit {
       (result => {
         console.log(result);
         this.notificationService.sendMessage('Review Submitted!','success');
-       
+        this.ngOnInit();
       })
     );
     //this.router.navigate(['products']);
@@ -62,6 +62,7 @@ export class CommentsComponent implements OnInit {
           result => {
             console.log('deleted');
             this.notificationService.sendMessage('Deleted', 'success');
+            this.ngOnInit();
           },
           err => {
             console.log(err);
@@ -71,6 +72,7 @@ export class CommentsComponent implements OnInit {
       }
     });
     this.notificationService.deleteConfirmation();
+     
   }
   ngOnInit() {
    

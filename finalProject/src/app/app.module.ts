@@ -19,7 +19,7 @@ import { ProductComponent } from './products/product-create/product.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductCanDeactiveGuardService } from './products/product-can-deactive-guard.service';
 import { AuthorizationGuard } from './AuthorizationGuard';
-
+import{CommentsComponent} from './comments/comments.component';
 
 const MWA_ROUTES : Routes = [
   { path: 'products', component: ProductListComponent,canActivate : [AuthorizationGuard]  },
