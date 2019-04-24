@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators,NgForm  } from '@angular/forms';
 import { MwaHttpServiceService } from '../mwa-http-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../notification/notification-service';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-comments',
@@ -25,8 +25,7 @@ export class CommentsComponent implements OnInit {
      this.service=http;
      this.createComments = this.fb.group({
        'reviewHeadline': ['', Validators.required],
-       'comment': ['', Validators.required],
-       'rateval': ['']
+       'comment': ['', Validators.required]
      });
     
      
