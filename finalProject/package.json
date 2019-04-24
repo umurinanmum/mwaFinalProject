@@ -21,6 +21,7 @@
     "@angular/router": "^7.2.14",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
+    "jwt-decode": "^2.2.0",
     "ngx-bootstrap": "^4.0.1",
     "rxjs": "~6.3.3",
     "sweetalert2": "^8.8.7",

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MwaHttpServiceService } from './mwa-http-service.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from './notification/notification-service';
 
 // <a [routerLink] = "['login']"> login </a>
 // <a [routerLink] = "['register']"> register </a>
@@ -20,19 +21,22 @@ import { Router } from '@angular/router';
       </div>
       <ul class="nav navbar-nav">
         <li>
-          <a routerLink="login"><b>Login</b></a>
+          <a routerLink="login" [ngStyle] = "{'visibility' : isVisible==='visible'  ? 'hidden' : 'visible'}"><b>Login</b></a>
         </li>
         <li>
-          <a routerLink="register">Register New User</a>
+          <a routerLink="register" [ngStyle] = "{'visibility' : isVisible==='visible'  ? 'hidden' : 'visible'}">Register New User</a>
         </li>
         <li>
-          <a routerLink="users" [style.visiblity]>User List</a>
+          <a routerLink="users" [ngStyle] = "{'visibility' : isVisible }" >User List</a>
         </li>
         <li>
-          <a routerLink="product/add">Create New Product</a>
+          <a routerLink="product/add" [ngStyle] = "{'visibility' : isVisible }">Create New Product</a>
         </li>
         <li>
-          <a routerLink="products">Product List</a>
+          <a routerLink="products" [ngStyle] = "{'visibility' : isVisible }">Product List</a>
+        </li>
+        <li>
+        <a (click) = "logoutClick()" [ngStyle] = "{'visibility' : isVisible }">Logout</a>
         </li>
       </ul>
     </nav>
@@ -43,19 +47,27 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  isVisible: boolean = false;
+  isVisible: string = 'hidden';
 
-  constructor() {
-
+  constructor(private notificationService: NotificationService,private router: Router) {
+    this.notificationService.loginEvent.subscribe(dummy => {
+      console.log('Login Event');
+      this.isVisible = 'visible';
+    });
   }
 
   ngOnInit(): void {
     var token = localStorage.getItem('token');
     if (token) {
-      this.isVisible = true;
+      this.isVisible = 'visible';
     }
   }
 
+  logoutClick(){
+    localStorage.clear();
+    this.isVisible = 'hidden';
+    this.router.navigate(['login']);
+  }
 
 
 }
