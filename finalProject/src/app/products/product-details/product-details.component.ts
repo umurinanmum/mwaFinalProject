@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
     this.route.params.subscribe(p => {
 
       this.productClient.get('products/' + p['productid']).subscribe(
-        data => { this.productDetails = data; console.log(data); },
+        data => { this.productDetails = data; },
         err => { console.log(err); }
       );
 
