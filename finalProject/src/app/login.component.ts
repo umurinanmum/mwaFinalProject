@@ -4,6 +4,8 @@ import { MwaHttpServiceService } from './mwa-http-service.service';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification/notification-service';
 
+import * as jwtDecoder from "jwt-decode";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login-component.html',
@@ -28,8 +30,11 @@ export class LoginComponent {
     this.http.post('users/login', this.loginForm.value).subscribe((result: any) => {
       if (result.status === 'SUCCESS') {
         localStorage.setItem('token', result.data.token);
-        localStorage.setItem('user', JSON.stringify(result.data.user));
+        localStorage.setItem('user',JSON.stringify(jwtDecoder(result.data.token)));
+        //localStorage.setItem('user', JSON.stringify(result.data.user));
         this.notificationService.sendLogin('dummy');
+
+        //console.log('decode : ' + JSON.stringify(jwtDecoder(result.data.token)));
         this.router.navigate(['products']);
       } else {
         this.notificationService.sendMessage('Login Failed', 'error');
