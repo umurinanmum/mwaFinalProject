@@ -7,7 +7,7 @@
     <div class="col-xs-12">
 
       <div class="row vertical-align">
-        <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" ngNativeValidate>
+        <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" #myForm="ngForm" ngNativeValidate>
        
         <div class="col-xs-10">
           <div class="form-group">
@@ -27,6 +27,7 @@
             </div>
           </div>
           <div class="form-group">
+
               <label>Overall Rating</label>
               <p>
                 <ngb-rating  [(rate)]="currentRate"></ngb-rating>
@@ -37,6 +38,7 @@
           <div class="form-group">
             <p>Submitted by {{user.firstName}}</p>
           <button type="submit" class="btn btn-primary" [disabled]="createComments.invalid">Add Review</button>
+
           </div>
         </div>
         <div class="col-xs-2">

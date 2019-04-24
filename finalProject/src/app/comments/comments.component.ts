@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,NgForm  } from '@angular/forms';
 import { MwaHttpServiceService } from '../mwa-http-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../notification/notification-service';
@@ -43,13 +43,15 @@ export class CommentsComponent implements OnInit {
       'postdate': new Date()
     };
    // console.log('onCreateComments');
-    console.log(body);
+    //console.log(body);
+  
     this.http.post('comments', body).subscribe(
       
       (result => {
         console.log(result);
         this.notificationService.sendMessage('Review Submitted!','success');
         this.ngOnInit();
+        this.createComments.reset();
       })
     );
     //this.router.navigate(['products']);
