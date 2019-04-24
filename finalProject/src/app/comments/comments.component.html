@@ -5,7 +5,7 @@
   <div class="panel-body">
 
     <div class="col-xs-12">
-
+{{user.firstName}}
       <div class="row vertical-align">
         <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" ngNativeValidate>
        
@@ -35,16 +35,16 @@
         </div>
         </form>
         
-<div class="reviewshow" *ngFor="let entry of entryList.reviews; index as i" >  
-  <div class="row">
+<div class="reviewshow" *ngIf="entryList" >  
+  <div class="row"  *ngFor="let entry of entryList; index as i">
     <div class="col-md-11 review">
-        <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.user}} </p>
-        <p class="text-secondary">{{entry.postdate | date: 'medium'}}</p>
+        <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} </p>
+        <p class="text-secondary">{{entry.reviews.postdate | date: 'medium'}}</p>
     
-        <h4>{{entry.headline}}</h4>
+        <h4>{{entry.reviews.headline}}</h4>
 
-        <p>{{entry.review}}</p>
-       
+        <p>{{entry.reviews.review}}</p>
+        <p  *ngIf="entry.reviews.user==user.firstName" ><button type="button" (click)="onDeleteComments(entry.reviews._id)" class="btn btn-danger btn-sm">Delete</button></p>
     </div>
   </div> 
 </div>

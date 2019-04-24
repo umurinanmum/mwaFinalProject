@@ -36,7 +36,7 @@ const mwaJwtManager = require('../jwt/MwaJwtManager');
 const Mwa_Result = require('../core/MwaResult');
 const resultStatus = require('../core/ResultStatusEnum');
 const userManager = require('../userManager/UserManager');
-
+var mongodb = require('mongodb');
 const collectionName = 'products';
 
 
@@ -45,54 +45,65 @@ router.get('/:productid', (req, res) => {
         return res.status(400).json({success: "ProductID parameter is missing."});
     
     db.getConnection(collectionName).then(data => {
+        data.aggregate(
+            [
+              { $match: {  productid : req.params.productid} },
+              { $unwind: '$reviews' },
+              { $sort: {    'reviews.postdate': -1  }}
+            ]
+         ).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            res.json(result);
+          });
        
-        data.findOne({ productid: req.params.productid }, (err, data) => {
-            if(err) return res.status(500).json(err);
-           // console.log(data);
-            res.json(data);
-        });
     });
 
 });
 
-router.delete('/:productid', (req, res) => {
-    if (!req.params.productid)
+router.delete('/:reviewid', (req, res) => { console.log("delete");
+    if (!req.params.reviewid)
         return res.status(400).json({success: "ProductID parameter is missing."});
 
     db.getConnection(collectionName).then(data => {
-        data.deleteOne({ productid: req.params.productid}, (err) => {
+        
+        data.update({ },{'$pull':{ 'reviews':{'_id':  ObjectId(req.params.reviewid) }}}, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'deleted'});
         });
     });
-    // req.db.collection('products')
-    //     .deleteOne({ productid: req.params.productid}, (err) => {
-    //         if(err) return res.status(500).json(err);
-    //         res.json({status: 1, success: 'deleted'});
-    //     });
+   
 });
 
 router.post('/', (req, res) => {
     if(!req.body) return res.status(400).json({success: "Request body is missing"});
 
-    let {err} = validateProduct(req.body);
-    if(err) return res.status(400).json(error.details[0].message);
+
+
+   // let {err} = validateProduct(req.body);
+   // if(err) return res.status(400).json(error.details[0].message);
 
     db.getConnection(collectionName).then(data => {
-       console.log(req.body);
+       //console.log(req.body);
        data.update(
            { productid: req.body.productid}, 
            {$push:{reviews:{
-              
+               _id:new mongodb.ObjectID(),
                headline: req.body.headline,
                review: req.body.review,
                user:req.body.username,
                raiting:req.body.raiting,
                postdate:req.body.postdate
             }}}, 
-           (err) => {
-                if(err) return res.status(500).json(err);
-                res.json({status: 1, success: 'updated'});
+           (err,object) => {
+                if(err){
+                    return res.status(500).json(err);
+                } 
+                else{
+                    console.log('success');
+                    res.status(200).json({status: 1, success: 'updated'});
+                }
+                
             });
     });
 
@@ -117,16 +128,6 @@ router.put('/', (req, res) => {
     //     });
 });
 
-function validateProduct(data){
-    const schema = {
-        productid: joi.number().integer().min(1).required().toArray,
-        productname: joi.string().min(3).required(),
-        description: joi.string().min(3).required(),
-        postdate: joi.string().min(3).required(),
-        adduser: joi.string().min(3).required()
-    };
 
-    return joi.validate(data);
-};
 
 module.exports = router;

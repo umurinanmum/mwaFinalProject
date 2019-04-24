@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MwaHttpServiceService } from '../mwa-http-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationService } from '../notification/notification-service';
 
 @Component({
   selector: 'app-comments',
@@ -13,9 +14,10 @@ export class CommentsComponent implements OnInit {
   createComments: FormGroup;
   entryList: JSON;
   service:any
+  user = JSON.parse(localStorage.getItem('user'));
   //@Input() pid:string;
   public pid:string;
-  constructor(private fb: FormBuilder, private http: MwaHttpServiceService, private router: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private http: MwaHttpServiceService, private router: ActivatedRoute, private notificationService: NotificationService) {
     // console.log(this.pid);
      this.service=http;
      this.createComments = this.fb.group({
@@ -23,33 +25,53 @@ export class CommentsComponent implements OnInit {
        'comment': ['', Validators.required]
       
      });
-     
+   
      
   };
   
   onCreateComment() {
     let body: any;
-    var user = localStorage.getItem('user');
-    console.log('user =====' +user);
+    
+    console.log("printing:"+this.user.firstName);
+    var username = this.user.firstName;
     body = {
       'productid':this.pid,
       'headline':this.createComments.get('reviewHeadline').value,
       'review': this.createComments.get('comment').value,
-      'username':"chinmoy",
-      'raiting':4,
+      'username':username,
+      'raiting':5,
       'postdate': new Date()
     };
-    console.log('onCreateComments');
+   // console.log('onCreateComments');
     console.log(body);
     this.http.post('comments', body).subscribe(
-      (err) => {console.log(err);},
+      
       (result => {
         console.log(result);
+        this.notificationService.sendMessage('Review Submitted!','success');
        
       })
     );
     //this.router.navigate(['products']);
   };
+  onDeleteComments(reviewid){
+    console.log('onDeleteProduct: ' + reviewid);
+    this.notificationService.deleteResult.subscribe(data => {
+      if (data) {
+        this.http.delete('comments/' + reviewid).subscribe(
+          result => {
+            console.log('deleted');
+            this.notificationService.sendMessage('Deleted', 'success');
+          },
+          err => {
+            console.log(err);
+            this.notificationService.sendMessage(err.toString(), 'error');
+          }
+        );
+      }
+    });
+    this.notificationService.deleteConfirmation();
+  }
   ngOnInit() {
    
     this.router.params.subscribe(p => {
