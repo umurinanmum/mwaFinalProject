@@ -28,6 +28,7 @@ export class UserCrudComponent implements OnInit {
         this.http.delete('users/' + id).subscribe((result: any) => {
           if (result.status === 'SUCCESS') {
              this.notificationService.sendMessage('Deleted', 'success');
+             this.ngOnInit();
           }
         });
       }
