@@ -10,6 +10,7 @@
             <th scope="col">Product name</th>
             <th scope="col">Product description</th>
             <th scope="col">Price</th>
+            <th scope="col">Created By</th>
             <th scope="col">Event</th>
           </tr>
         </thead>
@@ -19,6 +20,7 @@
             <td>{{entry.productname}}</td>
             <td>{{entry.description}}</td>
             <td>{{entry.price}}</td>
+            <td>{{entry.user.firstName}} {{entry.user.lastName}}</td>
             <td>
               <button type="button" class="btn btn-info" (click)="onDetailProduct(entry.productid)">Detail</button>&nbsp;
               <button type="button" class="btn btn-success" (click)="onEditProduct(entry.productid)">Edit</button>&nbsp;

@@ -23,9 +23,7 @@ export class UserCrudComponent implements OnInit {
   }
 
   onDelete(id) {
-    //console.log('delete called');
     this.notificationService.deleteResult.subscribe(data => {
-      //console.log('callback called');
       if (data) {
         this.http.delete('users/' + id).subscribe((result: any) => {
           if (result.status === 'SUCCESS') {

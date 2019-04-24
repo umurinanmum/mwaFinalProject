@@ -1,6 +1,7 @@
 let router = require('express').Router();
 let joi = require('joi');
 const db = require('../db/DbHelper.js');
+const jwt = require('../jwt/MwaJwtManager');
 
 /*
 //Users collection
@@ -77,7 +78,15 @@ router.post('/', (req, res) => {
     if(err) return res.status(400).json(error.details[0].message);
 
     db.getConnection(collectionName).then(data => {
-        data.insert(req.body, (err) => {
+        var product = req.body;
+        var token = req.headers.authorization.split(' ')[1];
+        var currentUser = jwt.verify(token);
+        product.user ={
+            'id' : currentUser._id,
+            'firstName' : currentUser.firstName,
+            'lastName' : currentUser.lastName
+        }; 
+        data.insert(product, (err) => {
             if(err) return res.status(500).json(err);
             res.json({status: 1, success: 'inserted'});
         });

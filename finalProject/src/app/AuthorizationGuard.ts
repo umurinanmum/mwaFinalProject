@@ -17,8 +17,8 @@ export class AuthorizationGuard implements CanActivate {
             this.router.navigate(['login']);
         }
         if (route && route.url.length > 0 && route.url[0].path === 'users') {
-            user = JSON.parse(user);
-            if (user.role != 'admin') {
+          const  userParsed : any = JSON.parse(user);
+            if (userParsed.role != 'admin') {
                 this.router.navigate(['login']);
             }
         }

@@ -24,7 +24,6 @@ export class NotificationService {
     }
 
     sendLogin(dummy){
-        console.log('sending login event');
         this.loginEvent.emit(dummy);
     }
 
