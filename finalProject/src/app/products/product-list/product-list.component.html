@@ -15,7 +15,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let entry of entryList; index as i" (click)="onDetailProduct(entry.productid)" class="pointerCursor">
+          <!-- (click)="onDetailProduct(entry.productid)" -->
+          <tr *ngFor="let entry of entryList; index as i"  class="pointerCursor">
             <td>{{i + 1}}</td>
             <td>{{entry.productname}}</td>
             <td>{{entry.description}}</td>

@@ -51,8 +51,9 @@ export class ProductComponent implements OnInit {
     console.log(body);
     this.service.post('products', body).subscribe(
       (result) => {
-        this.notificationService.sendMessage(result.toString(), 'success');
+        this.notificationService.sendMessage('Congrats', 'success');
         console.log(result);
+        this.createProduct.reset();
       },
       (err) => {
         this.notificationService.sendMessage(err.toString(), 'error');
