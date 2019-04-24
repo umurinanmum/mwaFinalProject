@@ -53,6 +53,7 @@ export class ProductListComponent implements OnInit {
           result => {
             console.log('deleted');
             this.notificationService.sendMessage('Deleted', 'success');
+            this.ngOnInit();
           },
           err => {
             console.log(err);
