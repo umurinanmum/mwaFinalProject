@@ -21,10 +21,10 @@ import { NotificationService } from './notification/notification-service';
       </div>
       <ul class="nav navbar-nav">
         <li>
-          <a routerLink="login"><b>Login</b></a>
+          <a routerLink="login" [ngStyle] = "{'visibility' : isVisible==='visible'  ? 'hidden' : 'visible'}"><b>Login</b></a>
         </li>
         <li>
-          <a routerLink="register">Register New User</a>
+          <a routerLink="register" [ngStyle] = "{'visibility' : isVisible==='visible'  ? 'hidden' : 'visible'}">Register New User</a>
         </li>
         <li>
           <a routerLink="users" [ngStyle] = "{'visibility' : isVisible }" >User List</a>
@@ -34,6 +34,9 @@ import { NotificationService } from './notification/notification-service';
         </li>
         <li>
           <a routerLink="products" [ngStyle] = "{'visibility' : isVisible }">Product List</a>
+        </li>
+        <li>
+        <a (click) = "logoutClick()" [ngStyle] = "{'visibility' : isVisible }">Logout</a>
         </li>
       </ul>
     </nav>
@@ -46,7 +49,7 @@ export class AppComponent implements OnInit {
 
   isVisible: string = 'hidden';
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService,private router: Router) {
     this.notificationService.loginEvent.subscribe(dummy => {
       console.log('Login Event');
       this.isVisible = 'visible';
@@ -58,6 +61,12 @@ export class AppComponent implements OnInit {
     if (token) {
       this.isVisible = 'visible';
     }
+  }
+
+  logoutClick(){
+    localStorage.clear();
+    this.isVisible = 'hidden';
+    this.router.navigate(['login']);
   }
 
 
