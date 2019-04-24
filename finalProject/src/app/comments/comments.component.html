@@ -5,7 +5,7 @@
   <div class="panel-body">
 
     <div class="col-xs-12">
-{{user.firstName}}
+
       <div class="row vertical-align">
         <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" ngNativeValidate>
        
@@ -27,27 +27,36 @@
             </div>
           </div>
           <div class="form-group">
+              <label>Overall Rating</label>
+              <p>
+                <ngb-rating  [(rate)]="currentRate"></ngb-rating>
+                <input type="text" formControlName="rateval" value="{{currentRate}}" >
+              </p>
+             
+            </div>
+          <div class="form-group">
+            <p>Submitted by {{user.firstName}}</p>
           <button type="submit" class="btn btn-primary" [disabled]="createComments.invalid">Add Review</button>
           </div>
         </div>
         <div class="col-xs-2">
-         
+           
         </div>
         </form>
         
-<div class="reviewshow" *ngIf="entryList" >  
-  <div class="row"  *ngFor="let entry of entryList; index as i">
-    <div class="col-md-11 review">
-        <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} </p>
-        <p class="text-secondary">{{entry.reviews.postdate | date: 'medium'}}</p>
-    
-        <h4>{{entry.reviews.headline}}</h4>
+        <div class="reviewshow" *ngIf="entryList" >  
+          <div class="row"  *ngFor="let entry of entryList; index as i">
+            <div class="col-md-11 review">
+                <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} </p>
+                <p class="text-secondary">{{entry.reviews.postdate | date: 'medium'}}</p>
+            
+                <h4>{{entry.reviews.headline}}</h4>
 
-        <p>{{entry.reviews.review}}</p>
-        <p  *ngIf="entry.reviews.user==user.firstName" ><button type="button" (click)="onDeleteComments(entry.reviews._id)" class="btn btn-danger btn-sm">Delete</button></p>
-    </div>
-  </div> 
-</div>
+                <p>{{entry.reviews.review}}</p>
+                <p  *ngIf="entry.reviews.user==user.firstName" ><button type="button" (click)="onDeleteComments(entry.reviews._id)" class="btn btn-danger btn-sm">Delete</button></p>
+            </div>
+          </div> 
+        </div>
       </div>
     </div>
   </div>

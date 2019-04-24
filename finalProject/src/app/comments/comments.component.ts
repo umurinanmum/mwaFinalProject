@@ -22,8 +22,8 @@ export class CommentsComponent implements OnInit {
      this.service=http;
      this.createComments = this.fb.group({
        'reviewHeadline': ['', Validators.required],
-       'comment': ['', Validators.required]
-      
+       'comment': ['', Validators.required],
+       'rateval': ['']
      });
    
      
@@ -39,7 +39,7 @@ export class CommentsComponent implements OnInit {
       'headline':this.createComments.get('reviewHeadline').value,
       'review': this.createComments.get('comment').value,
       'username':username,
-      'raiting':5,
+      'raiting':this.createComments.get('rateval').value,
       'postdate': new Date()
     };
    // console.log('onCreateComments');

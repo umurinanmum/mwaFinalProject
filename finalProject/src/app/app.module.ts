@@ -20,6 +20,7 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
 import { ProductCanDeactiveGuardService } from './products/product-can-deactive-guard.service';
 import { AuthorizationGuard } from './AuthorizationGuard';
 import{CommentsComponent} from './comments/comments.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const MWA_ROUTES : Routes = [
   { path: 'products', component: ProductListComponent,canActivate : [AuthorizationGuard]  },
@@ -48,7 +49,8 @@ const MWA_ROUTES : Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(MWA_ROUTES),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     {
