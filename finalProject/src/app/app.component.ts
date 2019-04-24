@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MwaHttpServiceService } from './mwa-http-service.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from './notification/notification-service';
 
 // <a [routerLink] = "['login']"> login </a>
 // <a [routerLink] = "['register']"> register </a>
@@ -45,8 +46,11 @@ export class AppComponent implements OnInit {
 
   isVisible: string = 'hidden';
 
-  constructor() {
-
+  constructor(private notificationService: NotificationService) {
+    this.notificationService.loginEvent.subscribe(dummy => {
+      console.log('Login Event');
+      this.isVisible = 'visible';
+    });
   }
 
   ngOnInit(): void {
@@ -55,7 +59,6 @@ export class AppComponent implements OnInit {
       this.isVisible = 'visible';
     }
   }
-
 
 
 }

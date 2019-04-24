@@ -1,8 +1,9 @@
 
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
-
+@Injectable()
 export class AuthorizationGuard implements CanActivate {
 
     constructor(private router: Router) {

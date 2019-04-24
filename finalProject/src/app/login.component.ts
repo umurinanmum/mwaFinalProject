@@ -29,12 +29,12 @@ export class LoginComponent {
       if (result.status === 'SUCCESS') {
         localStorage.setItem('token', result.data.token);
         localStorage.setItem('user', JSON.stringify(result.data.user));
-        console.log(result);
+        this.notificationService.sendLogin('dummy');
+        this.router.navigate(['products']);
       } else {
         this.notificationService.sendMessage('Login Failed', 'error');
       }
     });
-    //this.router.navigate(['products']);
   }
 
   onRegister(): void {
