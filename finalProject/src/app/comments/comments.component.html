@@ -5,9 +5,9 @@
   <div class="panel-body">
 
     <div class="col-xs-12">
-
-      <div class="row vertical-align">
-        <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" #myForm="ngForm" ngNativeValidate>
+      
+        <div class="row vertical-align">
+          <form [formGroup]="createComments" (ngSubmit)="onCreateComment()" #myForm="ngForm" ngNativeValidate>
        
         <div class="col-xs-10">
           <div class="form-group">
@@ -48,11 +48,13 @@
         <div class="col-xs-2">
            
         </div>
-        </form>
-        
+          </form>
+        </div>
+        <h3 class="customerreviewhdr">Customer Reviews</h3>
         <div class="reviewshow" *ngIf="entryList" >  
-          <div class="row"  *ngFor="let entry of entryList; index as i">
-            <div class="col-md-11 review">
+
+          <div [class]="''"  *ngFor="let entry of entryList; index as i;  let last = last" [class.lastitem]="last">
+            <div class="col-md-12 review">
                 <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} 
                   <ngb-rating rate="{{entry.reviews.raiting}}" [readonly]="true" [max]=5 ><ng-template let-fill="fill" let-index="index">
                       <span class="star" [class.filled]="fill === 100" >&#9733;</span>
@@ -68,7 +70,7 @@
             </div>
           </div> 
         </div>
-      </div>
+      
     </div>
   </div>
 </div>

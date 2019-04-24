@@ -1,7 +1,12 @@
 .review{
+    border: 1px solid #ccc;
+    padding: 20px  20px;
+    margin: 10px 0;
+    background: #FBFBFA;
+}
+.customerreviewhdr{
     border-bottom: 1px solid #ccc;
-    padding: 10px 0 40px 10px;
-    margin: 10px 20px;
+    padding-bottom: 10px;
 }
 
 .star {
@@ -17,3 +22,8 @@
   .filled.bad {
     color: #ff1e1e;
   }
+  .lastitem .review{
+   
+    padding-bottom: 20px;
+   
+}
