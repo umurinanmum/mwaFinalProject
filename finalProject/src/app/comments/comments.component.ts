@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators,NgForm  } from '@angular/forms';
 import { MwaHttpServiceService } from '../mwa-http-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../notification/notification-service';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-comments',
@@ -13,11 +14,13 @@ export class CommentsComponent implements OnInit {
 
   createComments: FormGroup;
   entryList: JSON;
-  service:any
+  service:any;
   user = JSON.parse(localStorage.getItem('user'));
+  currentRate=0;
   //@Input() pid:string;
   public pid:string;
-  constructor(private fb: FormBuilder, private http: MwaHttpServiceService, private router: ActivatedRoute, private notificationService: NotificationService) {
+  constructor(private fb: FormBuilder, private http: MwaHttpServiceService, private router: ActivatedRoute, 
+    private notificationService: NotificationService) {
     // console.log(this.pid);
      this.service=http;
      this.createComments = this.fb.group({
@@ -25,7 +28,7 @@ export class CommentsComponent implements OnInit {
        'comment': ['', Validators.required],
        'rateval': ['']
      });
-   
+    
      
   };
   
@@ -39,11 +42,11 @@ export class CommentsComponent implements OnInit {
       'headline':this.createComments.get('reviewHeadline').value,
       'review': this.createComments.get('comment').value,
       'username':username,
-      'raiting':this.createComments.get('rateval').value,
+      'raiting':this.currentRate,
       'postdate': new Date()
     };
    // console.log('onCreateComments');
-    //console.log(body);
+    console.log(body);
   
     this.http.post('comments', body).subscribe(
       
@@ -52,6 +55,7 @@ export class CommentsComponent implements OnInit {
         this.notificationService.sendMessage('Review Submitted!','success');
         this.ngOnInit();
         this.createComments.reset();
+        this.currentRate=0;
       })
     );
     //this.router.navigate(['products']);

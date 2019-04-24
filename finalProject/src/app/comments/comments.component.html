@@ -28,10 +28,10 @@
           </div>
           <div class="form-group">
 
-              <label>Overall Rating</label>
+              <label>Product Rating</label>
               <p>
-                <ngb-rating  [(rate)]="currentRate"></ngb-rating>
-                <input type="text" formControlName="rateval" value="{{currentRate}}" >
+                <ngb-rating  [(rate)]="currentRate" [max]=5></ngb-rating>
+                
               </p>
              
             </div>
@@ -49,7 +49,8 @@
         <div class="reviewshow" *ngIf="entryList" >  
           <div class="row"  *ngFor="let entry of entryList; index as i">
             <div class="col-md-11 review">
-                <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} </p>
+                <p><img src="assets/def_face.jpg" class="img img-rounded img-fluid" width="50"/> {{entry.reviews.user}} 
+                  <ngb-rating rate="{{entry.reviews.raiting}}" [readonly]="true" [max]=5 ></ngb-rating> </p>
                 <p class="text-secondary">{{entry.reviews.postdate | date: 'medium'}}</p>
             
                 <h4>{{entry.reviews.headline}}</h4>
