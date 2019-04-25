@@ -9,7 +9,10 @@
       <div class="form-group">
         <label class="control-label">Product Number: </label>
         <input type="text" class="form-control" formControlName="productid" required>
-        <div class="text-danger" *ngIf="createProduct.get('productid').invalid && createProduct.get('productid').touched">
+<!--        <div class="text-danger" *ngIf="createProduct.get('productid').invalid && createProduct.get('productid').touched">-->
+<!--          Product Number is required-->
+<!--        </div>-->
+        <div class="text-danger" *ngIf="createProduct.controls['productid'].invalid && createProduct.get('productid').touched">
           Product Number is required
         </div>
       </div>

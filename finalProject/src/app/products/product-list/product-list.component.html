@@ -20,10 +20,12 @@
             <td>{{i + 1}}</td>
             <td>{{entry.productname}}</td>
             <td>{{entry.description}}</td>
-            <td>{{entry.price}}</td>
+            <td align="right">{{entry.price | currency}}</td>
             <td>{{entry.user?.firstName}} {{entry.user?.lastName}}</td>
             <td>
-              <button type="button" class="btn btn-info" (click)="onDetailProduct(entry.productid)">Detail</button>&nbsp;
+<!--              <button type="button" class="btn btn-info" (click)="onDetailProduct(entry.productid)">Detail</button>&nbsp;-->
+<!--              <button type="button" class="btn btn-info" [routerLink]="['/products/', entry.productid]">Detail</button>&nbsp;-->
+              <button type="button" class="btn btn-info" [routerLink]="['/products/' + entry.productid]">Detail</button>&nbsp;
               <button type="button" class="btn btn-success" (click)="onEditProduct(entry.productid)">Edit</button>&nbsp;
               <button type="button" class="btn btn-danger" (click)="onDeleteProduct(entry.productid)">Delete</button>
             </td>

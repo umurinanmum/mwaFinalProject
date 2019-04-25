@@ -11,20 +11,18 @@ import {Product} from '../../models/product.model';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  //@Input() product: Product;
 
   public editProduct: FormGroup;
-  //public productDetails: any;
 
   constructor(private fb: FormBuilder, private service: MwaHttpServiceService,
               private router: Router, private notificationService: NotificationService,
               private route: ActivatedRoute) {
 
     this.editProduct = this.fb.group({
-      'productid': ['1', Validators.required],
-      'productname': ['Car', Validators.required],
-      'description': ['Carasdasd'],
-      'price': ['1000', Validators.required]
+      'productid': ['', Validators.required],
+      'productname': ['', Validators.required],
+      'description': [''],
+      'price': ['', Validators.required]
     });
 
   };
@@ -71,10 +69,10 @@ export class ProductEditComponent implements OnInit {
       },
       (err) => {
         this.notificationService.sendMessage(err.toString(), 'error');
-        //this.router.navigate(['products']);
         console.log(err);
       }
     );
-    //this.router.navigate(['products']);
+
+    this.editProduct.reset();
   };
 }
